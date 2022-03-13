@@ -17,11 +17,11 @@ const pool = mysql.createPool({
 
 const pool = mysql.createPool({
     connectionLimit: 5,
-    host: 'localhost',
+    host: 'mysql-ag-br1-11.conteige.cloud',
     port: '3306',
-    user: 'root',
-    password: '',
-    database: 'catalogo',
+    user: 'yxyeuv_anyloja',
+    password: '102030Brasil2020',
+    database: 'yxyeuv_anyloja',
     'multipleStatements': true,
     queueLimit: 0,
     waitForConnections: true
