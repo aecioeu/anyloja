@@ -4,6 +4,5 @@ arquivos
 videos
 critical.js
 node_modules
-config/https.js
-public/media
+public/media/
 package-lock.json
