@@ -1,0 +1,101 @@
+<%-include('partials/header', {back : true,title: 'Veja nossos Produtos ' , description: ''})-%>
+    <%- include('partials/menu_category') -%>
+
+        <div class="page-content-wrapper">
+            <!-- Top Products-->
+            <div class="top-products-area py-3">
+                <div class="container">
+                    <div class="section-heading d-flex align-items-center justify-content-between">
+                        <h6 class="ml-1">
+                            <%=categorie.name%>
+                        </h6>
+                        <!-- Layout Options-->
+
+
+                    </div>
+
+
+                    <%if(products.length >0){%>
+
+                        <%- include('partials/search') -%>
+                            <h6 class=" pt-3">
+                                👋 Ache Produtos Por:
+                            </h6>
+
+                            <div class="search box row g-3">
+                                <% for (var variation in variationPreSearch) {
+                                var value = variationPreSearch[variation];
+                                //console.log(key);
+                             %>
+                                    <div class="item">
+                                        <span class="badge badge-primary"><%=variation%></span>
+
+
+                                        <% value.forEach((product2, index) => { %>
+
+                                            <span class="badge badge-warning"> <%=product2.variation_value%></span>
+
+                                            <% }) %>
+
+                                    </div>
+
+                                    <% } %>
+
+
+                            </div>
+
+
+                            <% } %>
+
+
+
+
+
+                                <div class="row g-3">
+
+                                    <%if(products.length >0){%>
+
+
+
+
+                                        <% products.forEach((product, index) => { %>
+
+                                            <div class="col-6 col-md-4 col-lg-3">
+                                                <div class="card top-product-card">
+                                                    <div class="card-body">
+                                                        <%-((product.featured == 1) ? `<span class="badge badge-success">Destaque</span>`:``)  %>
+                                                            <a class="product-thumbnail d-block" href="/<%=store.cod%>/product/<%=product.product_id%>"><img class="mb-2"
+                                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                    data-src="<%= ((product.media.length > 0) ? `/media/${store.folder}/${product.media[0].name}` : '/media/no-pic.jpg')%>"
+                                    alt></a>
+                                                            <a class="product-title d-block" href="/<%=store.cod%>/product/<%=product.product_id%>">
+                                                                <%=product.name%>
+                                                            </a>
+                                                            <%-((product.discount > 0) ? `<p class="sale-price">Por: <rs>R$</rs>${(product.price-product.discount)}<span><rs>R$</rs>${product.price}</span></p>` : `<p class="sale-price">${product.price}</p>` )%>
+                                                                <!--<div class="product-rating"></div>-->
+
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <% }) %>
+                                                <%}else{%>
+                                                    <div class="col-md-12">
+                                                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                                            Ainda não temos produtos cadastrados nesta categoria.
+                                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                                                        </div>
+                                                    </div>
+                                                    <%}%>
+
+
+                                </div>
+                </div>
+            </div>
+        </div>
+
+        <%- include('partials/footer')-%>

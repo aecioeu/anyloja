@@ -1,0 +1,74 @@
+<%-include('partials/header', {back : 'home', header: categorie.name , title: 'Produtos da Categoria '+ categorie.name , description: ''})-%>
+    <%- include('partials/menu_category') -%>
+
+        <style>
+            .hilight- {
+                background: #0034c7 !important;
+                color: #fff;
+            }
+        </style>
+
+        <div class="page-content-wrapper">
+            <!-- Top Products-->
+            <div class="top-products-area py-3">
+                <div class="container">
+                    <!--    <div class="section-heading d-flex align-items-center justify-content-between">
+                        <h5 class="ml-1">
+                            <%=categorie.name%>
+                        </h5>
+                    </div>-->
+                    <%if(search_tags.length >0){%>
+
+                        <button type="button" id="suhaNavbarToggler" class="filter  btn-success btn btn-block btn-primary btn-lg mt-2 mb-3" style="font-weight: 400;">Filtrar
+                Produtos</button>
+
+                        <% } %>
+
+                            <div class="row g-3">
+
+                                <%if(products.length >0){%>
+
+                                    <% products.forEach((product, index) => { %>
+                                        <div class="col-6 col-md-4 col-lg-3">
+                                            <div class="card top-product-card">
+                                                <div class="card-body">
+                                                    <%-((product.featured == 1) ? `<span class="badge badge-success">Destaque</span>`:``)  %>
+                                                        <a class="product-thumbnail d-block" href="/<%=store.cod%>/product/<%=product.product_id%>"><img class="mb-2 lazy"
+                                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                    data-src="<%= ((product.media.length > 0) ? `/media/${store.folder}/${product.media[0].name}` : '/media/no-pic.jpg')%>"
+                                    alt></a>
+                                                        <a class="product-title d-block" href="/<%=store.cod%>/product/<%=product.product_id%>">
+                                                            <%=product.name%>
+                                                        </a>
+                                                        <%-((product.discount > 0) ? `<p class="sale-price">Por: <rs>R$</rs>${(product.price-product.discount).toFixed(2)}<span><rs>R$</rs>${product.price}</span></p>` : `<p class="sale-price">${product.price}</p>` )%>
+
+
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <% }) %>
+                                            <%}else{%>
+                                                <div class="col-md-12">
+                                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                                        Ainda não temos produtos cadastrados nesta categoria.
+                                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                                                    </div>
+                                                </div>
+                                                <%}%>
+
+
+                            </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            fbq('track', 'ViewProduct');
+        </script>
+
+        <%- include('partials/footer')-%>

@@ -1,0 +1,255 @@
+<%-include('../partial/header')%>
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+            <div class="row page-title">
+                <div class="col-md-12">
+
+
+                    <h4 class="mb-1 mt-0">Detalhes do Produto</h4>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-xl-6">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <ul class="nav nav-pills navtab-bg nav-justified">
+                                <li class="nav-item">
+                                    <a href="#produto" data-toggle="tab" aria-expanded="false" class="nav-link active">
+                                        <span class="d-block d-sm-none"><i class="uil-box"></i> Produto</span>
+                                        <span class="d-none d-sm-block">Produto</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#imagens" data-toggle="tab" aria-expanded="true" class="nav-link ">
+                                        <span class="d-block d-sm-none"><i class="uil-image"></i> Imagens</span>
+                                        <span class="d-none d-sm-block">Fotos</span>
+                                    </a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content text-muted">
+                                <div class="tab-pane  show active" id="produto">
+
+                                    <form id="product" method="post" action="/loja/edit/product" class="needs-validation form-horizontal" novalidate>
+
+
+                                        <div class="row">
+                                            <div class="col-xl-12 col-sm-6 col-12">
+                                                <div class="custom-control custom-switch mb-2">
+                                                    <input type="checkbox" class="custom-control-input" id="active" name="active" <%=((thisproduct.active==1 ) ? 'checked': '' ) %>>
+                                                    <label class="custom-control-label" for="active">Mostrar
+                                                    Produto</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-12 col-sm-6 col-12">
+                                                <div class="custom-control custom-switch mb-2">
+                                                    <input type="checkbox" class="custom-control-input" id="featured" name="featured" <%=((thisproduct.featured==1 ) ? 'checked': '' ) %>>
+                                                    <label class="custom-control-label" for="featured">Destacar
+                                                    Produto</label>
+                                                </div>
+                                            </div>
+
+                                            <!--<div class="col-xl-12 col-sm-4">
+                                                <div class="form-group mt-3 mt-sm-0">
+                                                    <label for="simpleinput">Categoria</label>
+                                                    <span class="text-left form-control btn btn-light mb-3"><%=thisproduct.name%></span>
+
+                                                </div>
+                                            </div>-->
+
+                                            <div class="col-xl-12 col-sm-4">
+                                                <div class="form-group mt-3 mt-sm-0">
+
+                                                    <label>Categorias do Produto</label>
+                                                    <select inputmode='none' readonly="readonly" class="form-control wide categories" name="categories" data-plugin="customselect" multiple>
+                                                    <optgroup label="Categorias do Produto">
+                                                        <%if(category.length > 0){%>
+                                                        <% category.forEach((categorie, index) => { %>
+                                                        <%-`<option value="${categorie.category_id}">${categorie.name}</option>`%>
+                                                        <%  }) %>
+                                                        <%  } %>
+                                                    </optgroup>
+
+
+                                                </select>
+
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-xl-12 col-sm-8">
+                                                <div class="form-group">
+                                                    <label for="simpleinput">Nome do Produto</label>
+                                                    <input type="text" class="form-control" id="simpleinput" name="name" value="<%=thisproduct.name%>" placeholder="Nome da Produto">
+
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-12 col-sm-4">
+                                                <div class="form-group mt-0 mt-sm-0">
+
+                                                    <label>Variações do Produto</label>
+                                                    <select inputmode='none' readonly="readonly" class="form-control wide tags" name="tags" data-placeholder="Variações do Produto" data-plugin="customselect" multiple aria-multiselectable=true>
+
+
+                                                    <%if(tags.length > 0){%>
+
+                                                    <% tags.forEach((title, index) => { %>
+                                                    <optgroup
+                                                        label="<%=title.tag_title%><%-(title.required == 1) ? ' *required*' : ''%>">
+
+                                                        <% title.tags.forEach((tag, index) => { %>
+                                                        <%-`<option value="${tag.id}">${tag.name}</option>`%>
+
+                                                        <%  }) %>
+                                                    </optgroup>
+                                                    <%  }) %>
+                                                    <%  } %>
+                                                </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="simpleinput">Descrição</label>
+                                                    <textarea name="description" class="form-control" placeholder="Descrição do Produto" rows="3" cols="33"><%=thisproduct.description%></textarea>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="simpleinput">Preço</label>
+                                                    <input type="text" class="form-control" pattern="\d+((\(|)|-)\d+)?" inputmode="numeric" onkeyup="k(this);" name="price" value="<%=thisproduct.price%>" placeholder="0.00">
+
+                                                </div>
+                                            </div>
+
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="simpleinput">Desconto</label>
+                                                    <input type="text" class="form-control" pattern="\d+((\(|)|-)\d+)?" inputmode="numeric" onkeyup="k(this);" name="discount" value="<%=thisproduct.discount%>" placeholder="0.00">
+
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-12 col-sm-12 mb-2">
+
+
+
+                                                <input type="hidden" id="product_id" name="product_id" value='<%=thisproduct.product_id%>'>
+                                                <input type="hidden" id="store_folder" name="store_folder" value='<%=store.folder%>'>
+                                                <input type="hidden" class="variations_data" name="variations_data" value='<%=thisproduct.variations_data%>'>
+
+
+
+
+
+                                            </div>
+
+
+                                        </div>
+
+                                        <div class="row ">
+                                            <div class="col-xl-4 col-sm-4 ">
+                                                <button type="submit" class="form-control btn btn-success enviar">Concluir</button>
+
+                                            </div>
+
+                                        </div>
+
+
+
+                                    </form>
+
+                                </div>
+                                <div class="tab-pane" id="imagens">
+
+
+                                    <div class="row">
+                                        <div class="col-xl-12 col-sm-12">
+                                            <label for="simpleinput">Imagens do <%=thisproduct.name%></label>
+                                            <div class="dropzone dz-clickable mb-3" id="mydropzone" name="mainFileUploader">
+
+                                                <div class="fallback">
+                                                    <input name="file" type="file" multiple />
+                                                </div>
+
+                                                <div class="dz-message needsclick">
+                                                    <i class="h1 text-muted  uil-cloud-upload"></i>
+                                                    <h3>Click ou Arraste imagens para essa area.</h3>
+
+                                                </div>
+                                            </div>
+
+                                            <buttom onclick="document.getElementsByClassName('enviar')[0].click()" class="form-control btn btn-success ">Concluir</buttom>
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                        <!-- end card-body -->
+                    </div>
+                    <!-- end card-->
+                </div>
+                <!-- end col -->
+            </div>
+            <!-- end row -->
+
+        </div>
+        <!-- container-fluid -->
+
+    </div>
+    <style>
+        .dropzone {
+            zoom: 0.8;
+        }
+    </style>
+
+
+    <!-- /.modal -->
+
+
+
+
+    <div class="complete-select2">
+        <span class="finalizar form-control btn btn-secondary ">Concluir</span>
+    </div>
+
+    <%-include('../partial/footer')%>
+
+        <script>
+            var categories = <%-JSON.stringify(thisproduct.categorie_id.split(','))%>
+                var tags = <%-JSON.stringify(thisproduct.tags.split(',')) %>
+                    // $(".categories").val('VmoOJL66XQ').trigger('change');
+                    $('.categories').val(categories).trigger('change');
+            $('.tags').val(tags).trigger('change');
+        </script>
+
+
+        <!-- Latest Sortable -->
+        <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+        <script>
+            new Sortable(document.getElementById('mydropzone'), {
+                draggable: '.dz-preview',
+                animation: 150, // ms, animation speed moving items when sorting, `0` — without animation
+                easing: "cubic-bezier(1, 0, 0, 1)", // Easing for animation. Defaults to null. See https://easings.net/ for examples.
+                // Element dragging ended
+                onEnd: function( /**Event*/ evt) {
+                    UpdateOrder('<%=thisproduct.product_id%>')
+                }
+            })
+        </script>

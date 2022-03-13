@@ -1,0 +1,33 @@
+<%if(search_tags.length >0){%>
+
+    <div class="mb-3 mt-3">
+        <%- include('search') -%>
+    </div>
+
+    <div search="buscar" class="search box row g-3 mt-2" style="margin: 1px;">
+        <% search_tags.forEach((tags_title, index) => { %>
+            <div class="item">
+                <h6 class="mt-2">
+                    Compre por
+                    <%=tags_title.title%>
+                </h6>
+
+                <% tags_title.tags.forEach((tag, index) => { %>
+                    <span class="switch badge bnt-search hilight-<%=tag.id%>" opt="<%=tag.id%>"><%=tag.name%></span>
+
+                    <% }) %>
+            </div>
+            <% }) %>
+
+    </div>
+
+    <div class="cart-form-wrapper py-2 busca">
+        <div class="container cart-form">
+            <button class="btn btn-lg w-100 btn-success lt-1" id="buscar" type="submit">MOSTRAR PRODUTOS</button>
+        </div>
+
+    </div>
+
+  
+
+    <% } %>

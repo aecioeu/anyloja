@@ -1,0 +1,91 @@
+<%-include('../../partial/header')%>
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+            <div class="row page-title">
+                <div class="col-md-12">
+
+                    <h4 class="mb-1 mt-0">Descrição</h4>
+
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+
+
+                            <form class="form-horizontal" method="POST" action="/loja/tags/editor">
+
+                                <input type="hidden" name="id_variation" value="<%-((tags_title) ? (tags_title) ? tags_title: '' : '') %>">
+                                <input type="hidden" name="id" value="<%-((tags) ? (tags.id) ? tags.id: '' : '') %>">
+
+
+
+
+                                <div class="row">
+                                    <div class="col-xl-2 col-sm-4 col-6"> <label for="simpleinput"></label>
+                                        <div class="custom-control custom-switch mb-2">
+                                            <input type="checkbox" class="custom-control-input" id="customSwitch1" <%-((tags) ? (tags.active==1 ) ? 'checked' : '' : 'checked') %> name="active">
+                                            <label class="custom-control-label" for="customSwitch1">Mostrar</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-4 col-sm-4">
+                                        <div class="form-group mt-3 mt-sm-0">
+                                            <label for="simpleinput">Variação</label>
+                                            <input type="text" class="form-control" id="simpleinput" name="name" value="<%-((tags) ? (tags.name) ? tags.name : '' : '') %>" placeholder="Nome da Variação">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-4 col-sm-4">
+                                        <button type="submit" class="form-control btn btn-success">Salvar</button>
+
+                                    </div>
+                                </div>
+
+
+
+                            </form>
+
+                        </div>
+                        <!-- end card-body -->
+
+                    </div>
+                    <%if(tags){%>
+                        <%if(tags.id){%>
+
+                            <div class="row">
+                                <div class="col-xl-6 col-sm-6">
+                                    <a href="#" onclick="deleteTags('<%=tags.id %>')" class="form-control btn btn-danger">Excluir
+                            essa opção de variação</a>
+                                    <p class="sub-header mt-2">Ao excluir, todos os produtos que contenha essa opção, não a terão mais disponível para seleção.</p>
+                                </div>
+                            </div>
+                            <%}%>
+                                <%}%>
+
+
+                                    <!-- end card-->
+                </div>
+                <!-- end col -->
+            </div>
+            <!-- end row -->
+
+
+
+
+        </div>
+        <!-- container-fluid -->
+
+    </div>
+
+
+
+    <%-include('../../partial/footer')%>

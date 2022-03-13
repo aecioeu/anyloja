@@ -1,0 +1,141 @@
+<%-include('partials/header', {back : 'home', header:(searchname ? searchname : 'Produtos'), title: 'Separei esses Produtos para você dar uma olhada!' , description: 'Busque de forma rápida qualquer produto na nossa loja.'})-%>
+
+    <%if(products.length >0){%>
+        <%- include('partials/menu_category') -%>
+
+            <%}else{%>
+                <%- include('partials/menu_product') -%>
+                    <%}%>
+
+
+                        <div class="page-content-wrapper">
+                            <!-- Top Products-->
+                            <div class="top-products-area pt-2">
+                                <div class="container">
+                                    <div class="section-heading d-block align-items-center justify-content-between filter">
+
+                                        <!--<%if(searchname == ""){%>
+<h6 class="">
+    Sua Busca:
+    <% result_search_tags.forEach((title, index) => { %>
+    <% title.tags.forEach((tag, index) => { %>
+    <span class="badge-tags gray size"><%=tag.name%></span>
+    <%})%>
+
+    <%})%>
+</h6>
+<%}%>-->
+
+
+                                        <!-- Layout Options-->
+
+                                    </div>
+                                    <div class="row g-3">
+
+                                        <%if(products.length >0){%>
+
+                                            <!--<button type="button" id="suhaNavbarToggler" class="filter  btn-success btn btn-block btn-primary btn-lg mt-2 " style="font-weight: 400;">FILTRAR PRODUTOS</button>
+                                            -->
+
+                                            <span id="suhaNavbarToggler" class="filter btn-g mt-2 ">
+    <svg class="icon" style="height: 24px;line-height: 30px;color:#4285f4;fill: currentColor;">
+        <use xlink:href="#magnifier"></use>
+    </svg></span>
+
+
+                                            <select class="form-control form-select" id="value_filter" name="value_filter" style="font-size: 17px;font-weight: 700;width: 80%;">
+    <option value="lower">Mostrar por Menor Preço</option>
+    <option value="high">Mostrar por Maior Preço</option>
+    <option value="discount">Mostrar Maior Desconto em %</option>
+    <option value="discount_price">Mostrar Maior Desconto em R$</option>
+
+</select>
+
+                                            <%if(products.length >0){%>
+                                                <p class='fl-left'>
+                                                    <%-`${((totalResults>1) ? `<strong>${totalResults}</strong> Produtos` : `<strong>${totalResults}</strong> Resultado`)}`%>
+                                                </p>
+                                                <%}%>
+
+                                                    <% products.forEach((product, index) => { %>
+
+                                                        <div class="col-6 col-md-4 col-lg-3">
+                                                            <div class="card top-product-card">
+                                                                <div class="card-body">
+
+
+
+                                                                    <%if(searchType == 'discount_price'){%>
+                                                                        <%-(product.discount > 0) ? ` <span class="badge badge-danger off"><rs>R$</rs>${Math.round((product.discount) * 100)/100} OFF</span>` : ''%>
+                                                                            <%}else{%>
+                                                                                <%-(product.discount > 0) ? ` <span class="badge badge-danger off"">${Math.round((product.discount/product.price) * 100)}% OFF</span>` : ''%>
+                                                                                    <%}%>
+
+                                                                                        <%-((product.featured == 1) ? `<span class="badge badge-success d-destaque"><i class="las la-star"></i></span>`:``)  %>
+
+                                                                                            <a class="product-thumbnail d-block" href="/<%=store.cod%>/product/<%=product.product_id%>"><img
+                    class="mb-2 lazy"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    data-src="<%= ((product.media.length > 0) ? `/media/${store.folder}/${product.media[0].name}` : '/media/no-pic.jpg')%>"
+                    alt></a>
+                                                                                            <a class="product-title d-block" href="/<%=store.cod%>/product/<%=product.product_id%>">
+                                                                                                <%=product.name%>
+                                                                                            </a>
+                                                                                            <%-((product.discount > 0) ? `<p class="sale-price">Por: <rs>R$</rs>${(product.price-product.discount).toFixed(2)}<span><rs>R$</rs>${product.price}</span></p>` : `<p class="sale-price">${product.price}</p>` )%>
+
+                                                                                                <%if(product.product_required_tag.length > 0){%>
+                                                                                                    <% product.product_required_tag.forEach((required_tag, index) => { %>
+
+
+                                                                                                        <span class="badge-tags" style="background-color: #fff;color:#000"><%=required_tag.title%></span>
+                                                                                                        <% required_tag.tags.forEach((tag, index) => { %>
+                                                                                                            <span class="badge-tags gray"><%=tag.name%></span>
+                                                                                                            <%})%>
+
+
+                                                                                                                <%})%>
+                                                                                                                    <%}%>
+
+
+
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <% }) %>
+                                                            <%}else{%>
+                                                                <div class="col-md-12">
+                                                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                                                        Não encontramos nenhum resultado para sua busca, tente outro termo.
+                                                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                                                                    </div>
+
+                                                                    <%- include('partials/filtro') -%>
+                                                                </div>
+                                                                <%}%>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <%- include('partials/footer')-%>
+                            <script>
+                                StoreSearch()
+                                fbq('track', 'BuscouAlgo', {});
+
+                                /*function GetURLParameter(sParam) {
+                                    var sPageURL = window.location.search.substring(1);
+                                    var sURLVariables = sPageURL.split('&');
+                                    for (var i = 0; i < sURLVariables.length; i++) {
+                                        var sParameterName = sURLVariables[i].split('=');
+                                        if (sParameterName[0] == sParam) {
+                                            return sParameterName[1];
+                                        }
+                                    }
+                                }​*/
+                            </script>

@@ -1,0 +1,200 @@
+<%-include('../partial/header')%>
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+            <div class="row page-title">
+
+
+                <div class="col-xl-6 col-sm-6 mb-3">
+                    <a href="/loja/categories/<%=category.category_id %>/product/create" class="form-control btn btn-success">Adicionar Produto</a>
+
+
+                </div>
+
+                <div class="col-md-12">
+                    <p class="pre-title">Mostrando:</p>
+                    <h4 class="mt-1 mb-2"><a href="/loja/categories/">Suas Categorias</a> /
+                        <%=category.name %>
+                    </h4>
+                </div>
+
+
+            </div>
+
+
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a href="#ativos" data-toggle="tab" aria-expanded="false" class="nav-link active">
+                        <span class="d-block d-sm-none">Produtos Ativos</span>
+                        <span class="d-none d-sm-block">Produtos Ativos</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#inativos" data-toggle="tab" aria-expanded="true" class="nav-link">
+                        <span class="d-block d-sm-none">Inativos</span>
+                        <span class="d-none d-sm-block">Inativos</span>
+                    </a>
+                </li>
+
+            </ul>
+
+
+            <div class="tab-content text-muted">
+                <div class="tab-pane active" id="ativos">
+                    <div class="row">
+                        <%if(products.length >0){%>
+                            <% products.forEach((product, index) => { %>
+
+                                <div class="col-12 col-xl-4 col-md-6 col-sm-6" id="<%=product.product_id %>">
+                                    <div class="card">
+
+                                        <div class="dropdown" style="position: absolute; right: 10px;top: 10px;z-index: 9900;">
+                                            <a href="#" class="dropdown-toggle text-muted arrow-none" data-toggle="dropdown" aria-expanded="false" draggable="false">
+                                                <i class="uil uil-ellipsis-v font-size-14"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(16px, 19px, 0px);">
+                                                <a target="_blank" href="/<%=store.cod%>/product/<%=product.product_id %>" class="dropdown-item" draggable="false"><i class="uil uil-eye mr-2"></i>Ver
+                                        Produto na Loja</a>
+
+                                                <!-- item-->
+                                                <a href="/loja/product/<%=product.product_id %>" class="dropdown-item" draggable="false"><i class="uil uil-edit-alt mr-2"></i>Editar Produto</a>
+                                                <!-- item-->
+                                                <a href="/loja/product/<%=product.product_id %>#imagens" class="dropdown-item" draggable="false"><i class="uil uil-user-plus mr-2"></i>Adicionar
+                                        Imagens</a>
+                                                <!-- item-->
+                                                <a href="#" class="dropdown-item text-danger" draggable="false" onclick="deleteproduct('<%=product.product_id %>')"><i
+                                            class="uil uil-trash mr-2"></i>Excluir Produto</a>
+                                            </div>
+                                        </div>
+
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col-5" style="text-align: center;">
+                                                <a href="/loja/product/<%=product.product_id %>#imagens">
+                                                    <div class="cell-image-list mt-3 ml-3">
+
+                                                        <%if(product.media.length >0){%>
+
+                                                            <% product.media.reverse().forEach((image, index) => { %>
+
+
+                                                                <img class="cell-img lazy" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/media/<%=store.folder%>/<%=image.name%>">
+                                                                <% }) %>
+                                                                    <%}else{%>
+                                                                        <div class="cell-img" style="border-radius: 50px;height: 100px;width: 100px;background-image: url('/media/no-pic.jpg')">
+                                                                        </div>
+
+                                                                        <%}%>
+
+                                                                            <%-(product.discount > 0) ? `<span class="badge badge-soft-danger py-1 discount-tag">${Math.round((product.discount/product.price) * 100)}% OFF</span>` : ``%>
+
+
+                                                    </div>
+
+                                                </a>
+                                                <div class="price-prod mt-2 mb-2">
+                                                    <rs>R$</rs>
+                                                    <%=(product.price-product.discount).toFixed(2) %>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-7">
+                                                <div class="card-body">
+                                                    <h5 class="mt-0 mb-1">
+                                                        <%=product.name %>
+
+                                                    </h5>
+
+
+
+
+
+                                                    <%for (const [title, tags] of Object.entries(product.tags)) {%>
+
+                                                        <div class="variation-card mr-1">
+                                                            <span class="badge-tags" style="background-color: #fff;color:#000">
+                                                <%=title%></span>
+                                                            <% tags.forEach((tag, index2) => { %>
+                                                                <span class="gray"><%=tag.name%></span>
+                                                                <%})%>
+                                                        </div>
+                                                        <%}%>
+
+
+
+
+                                                            <a href="/loja/product/<%=product.product_id %>" class="btn
+                                        btn-primary btn-sm btn-block mr-1 mt-2">Editar
+                                        </a>
+
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--<div class="card-body text-center">-->
+
+                                        <!--<div class="col-4">
+                                                        <div class="custom-control custom-switch mb-2 mt-2 text-center">
+                                                            <input type="checkbox" class="custom-control-input id-product" id-product="<%=product.product_id %>" action="active" id="customSwitch<%=product.product_id %>" <%=((product.active==1 ) ? 'checked': '' ) %>>
+                                                            <label class="custom-control-label" for="customSwitch<%=product.product_id %>">
+                                                    Mostrar
+                                                </label>
+                                                        </div>
+                                                    </div>
+        
+                                                    <div class=" col-4">
+                                                        <div class="custom-control custom-switch mb-2 mt-2 text-center">
+                                                            <input type="checkbox" class="custom-control-input id-product" id-product="<%=product.product_id %>" action="featured" id="customSwitch2<%=product.product_id %>" <%=((product.featured==1 ) ? 'checked': '' ) %>>
+                                                            <label class="custom-control-label" for="customSwitch2<%=product.product_id %>">
+                                                    Destaque
+                                                </label>
+                                                        </div>
+                                                    </div>-->
+
+
+                                        <!--<a href="/loja/product/<%=product.product_id %>#imagens" class="btn btn-secondary btn-sm btn-block mr-1">Adicionar Imagens</a>
+        
+                                                     <a href="#" class="btn btn-danger btn-sm btn-block mr-1" onclick="deleteproduct('<%=product.product_id %>')">Excluir</a>
+                                                   -->
+
+                                        <!-- </div>-->
+                                    </div>
+                                </div>
+
+                                <% }) %>
+                                    <%}else{%>
+                                        <div class="col-md-12">
+                                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                                Você ainda não tem produtos cadastrados nesta categoria.
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                                            </div>
+                                        </div>
+                                        <%}%>
+
+
+                    </div>
+                </div>
+                <div class="tab-pane show" id="inativos">
+                    <p>...</p>
+
+                </div>
+
+            </div>
+
+
+
+
+
+        </div>
+        <!-- container-fluid -->
+
+    </div>
+
+
+    <%-include('../partial/footer')%>

@@ -1,0 +1,102 @@
+<%-include('../partial/header')%>
+    <div class="content page-title">
+
+        <div class="row">
+            <div class="col-12 col-xl-6">
+
+                <h4 class="mb-1 mt-0 mb-4">Carregue seus Stories
+                </h4>
+                <div class="card">
+                    <div class="card-body">
+
+
+                        <input type="hidden" id="store_folder" name="store_folder" value='<%=store.folder%>'>
+                        <div class="row">
+                            <div class="col-xl-12 col-sm-12">
+                                <label for="simpleinput">Seus Stories</label>
+                                <div class="dropzone dz-clickable mb-3" id="mydropzoneVideos" name="mainFileUploader">
+
+                                    <div class="fallback">
+                                        <input name="file" type="file" multiple />
+                                    </div>
+
+                                    <div class="dz-message needsclick">
+                                        <i class="h1 text-muted  uil-cloud-upload"></i>
+                                        <h3>Arraste seus Stories<br> para essa area.</h3>
+
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+                    <!-- end card-body -->
+                </div>
+                <!-- end card-->
+            </div>
+            <!-- end col -->
+        </div>
+        <!-- end row -->
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+            <div class="row page-title">
+                <div class="col-md-12">
+
+                    <h4 class="mb-1 mt-0 mb-4">Storeis sendo Exibidos
+                    </h4>
+
+
+                    <span class="img-preview"></span>
+
+                    <div class="row stories" id="stories">
+
+
+                    </div>
+
+
+                    <div id="template-preview">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+    </div>
+    <!-- container-fluid -->
+
+    </div>
+    <style>
+        .dropzone {
+            zoom: 0.8;
+        }
+    </style>
+
+
+
+    <%-include('../partial/footer')%>
+
+        <!-- Latest Sortable -->
+        <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+        <script>
+            new Sortable(document.getElementById('stories'), {
+                handle: '.move',
+                //draggable: 'card',
+                animation: 150, // ms, animation speed moving items when sorting, `0` — without animation
+                easing: "cubic-bezier(1, 0, 0, 1)", // Easing for animation. Defaults to null. See https://easings.net/ for examples.
+                // Element dragging ended
+                onEnd: function( /**Event*/ evt) {
+                    UpdateOrderStories()
+                }
+            })
+        </script>

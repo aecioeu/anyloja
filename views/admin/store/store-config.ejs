@@ -1,0 +1,235 @@
+<%-include('../partial/header')%>
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+            <div class="row page-title">
+                <div class="col-md-12">
+                    <span class="btn helper mb-3"><i data-feather="help-circle"></i>Aprenda Usar</span>
+                    <h4 class="mb-1 mt-0">Dados da Loja</h4>
+
+                </div>
+            </div>
+
+
+
+
+            <div class="row">
+                <div class="col-12 col-md-10  col-xl-10">
+                    <div class="card">
+                        <div class="card-body">
+                            <form id="product" method="post" action="/loja/store" class="needs-validation form-horizontal" enctype="multipart/form-data" novalidate>
+                                <div class="row">
+                                    <div class="col-xl-12 col-sm-12 text-center mt-3">
+                                        <img id="blah" src="../<%=((store.logo) ? `media/${store.folder}/logo/logo180.webp` : `/media/no-pic.jpg`)%>" alt="" class=" rounded-circle" style="margin-left: 10px;border: 4px #f2f3f6 solid;width: 180px;height: 180px;">
+                                        <div class="form-group mt-sm-0">
+                                            <label for="simpleinput">Sua Marca <small>(Sugestão 500px por
+                                                500px))</small></label>
+                                            <input id="imgInp" class="form-control" type='file' name="file" accept="image/*" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-6 col-sm-6">
+                                        <div class="form-group mt-sm-0">
+                                            <label for="simpleinput">Nome da Loja</label>
+                                            <span class="text-left form-control btn btn-light mb-3"><%=store.name%></span>
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-xl-6 col-sm-6">
+                                        <div class="form-group">
+                                            <label for="simpleinput">Endereço <small>(Rua, Numero - Bairro /
+                                                Cidade)</small></label>
+                                            <input type="text" class="form-control" id="simpleinput" name="address" value="<%=store.address%>" placeholder="Endereço da Sua Loja">
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-xl-6 col-sm-6">
+                                        <div class="form-group">
+                                            <label for="simpleinput">CPF/CNPJ</label>
+                                            <input type="number" class="form-control" id="simpleinput" name="doc" value="<%=store.doc%>" placeholder="CPF/CNPJ">
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-xl-6 col-sm-6">
+                                        <div class="form-group">
+                                            <label for="simpleinput">Whatsapp</label>
+                                            <input type="text" class="form-control" id="simpleinput" inputmode="numeric" onkeyup="p(this);" name="phone" value="<%=store.phone%>" placeholder="(31) 98888-8888">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-12 col-sm-12">
+                                        <div class="form-group">
+                                            <label for="simpleinput">Bio</label>
+                                            <textarea name="description" class="form-control" value="" placeholder="Conte um pouco da sua historia" rows="3" cols="33"><%=store.bio%></textarea>
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-xl-12 col-sm-12">
+                                        <div class="form-group">
+                                            <label for="simpleinput">Aviso no Checkout</label>
+                                            <textarea name="message" class="form-control" value="" placeholder="Mensagem exibida na finalização do pedido, pode orientar sobre discontos, condições especiais ou outros avisos importantes." rows="3" cols="33"><%=store.message%></textarea>
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-xl-5 col-sm-4">
+                                        <div class="form-group">
+                                            <label for="simpleinput">Instagram</label>
+                                            <input type="text" class="form-control" name="instagram" value="<%=store.instagram%>" placeholder="@suaempresa">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-4 col-sm-4">
+                                        <div class="form-group">
+                                            <label for="simpleinput">Fan page - Facebook</label>
+                                            <input type="text" class="form-control" name="facebook" value="<%=store.facebook%>" placeholder="https://www.facebook.com/suapagina">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-3 col-sm-4">
+                                        <div class="form-group">
+                                            <label for="simpleinput">Pedido Mínimo</label>
+                                            <input type="text" class="form-control" inputmode="numeric" onkeyup="k(this);" name="min_order" value="<%=store.min_order%>" placeholder="0.00">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-3 col-sm-4">
+                                        <div class="form-group">
+                                            <label for="simpleinput">Parcelamento</label>
+                                            <input type="text" class="form-control" inputmode="numeric" name="installment" value="<%=store.installment%>" placeholder="0">
+
+                                        </div>
+                                    </div>
+
+
+
+
+
+                                    <div class="col-xl-3 col-sm-4">
+                                        <div class="form-group">
+                                            <label for="simpleinput">Pixel Facebook</label>
+                                            <input type="text" class="form-control" name="pixel" value="<%=store.pixel%>" placeholder="xxxxxxxxxxxxxxx">
+
+                                        </div>
+                                    </div>
+
+
+
+
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-xl-6 col-lg-6 col-sm-6 col-md-6">
+
+                                        <div class="custom-control custom-switch mb-2 mt-2 ">
+                                            <input type="checkbox" class="custom-control-input" name="categories_home" id="customSwitch<%=store.show_categories_home %>" <%=((store.show_categories_home==1 ) ? 'checked': '' ) %>>
+                                            <label class="custom-control-label" for="customSwitch<%=store.show_categories_home %>">
+                                            Mostrar Categorias na Home
+                                        </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-6 col-lg-6 col-sm-6 col-md-6">
+
+                                        <div class="custom-control custom-switch mb-2 mt-2 ">
+                                            <input type="checkbox" class="custom-control-input" name="banner_sequential" id="customSwitchBanner<%=store.show_banner_sequential %>" <%=((store.show_banner_sequential==1 ) ? 'checked': '' ) %>>
+                                            <label class="custom-control-label" for="customSwitchBanner<%=store.show_banner_sequential %>">
+                                            Mostrar Banners como Slide
+                                        </label>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-xl-6 col-lg-6 col-sm-6 col-md-6">
+
+                                        <div class="custom-control custom-switch mb-2 mt-2 ">
+                                            <input type="checkbox" class="custom-control-input" name="show_search_at_home" id="customSwitchHome<%=store.show_search_at_home %>" <%=((store.show_search_at_home==1 ) ? 'checked': '' ) %>>
+                                            <label class="custom-control-label" for="customSwitchHome<%=store.show_search_at_home %>">
+                                            Mostrar Busca por Variações na Home
+                                        </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-6 col-lg-6 col-sm-6 col-md-6">
+
+                                        <!--<div class="custom-control custom-switch mb-2 mt-2 ">
+                                            <input type="checkbox" class="custom-control-input" name="banner_sequential" id="customSwitchBanner<%=store.show_banner_sequential %>" <%=((store.show_banner_sequential==1 ) ? 'checked': '' ) %>>
+                                            <label class="custom-control-label" for="customSwitchBanner<%=store.show_banner_sequential %>">
+                                            Mostrar Banners como Slide
+                                        </label>
+                                        </div>-->
+                                    </div>
+
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-xl-4 col-sm-4 ">
+                                        <button type="submit" id="send" class="form-control btn btn-success ">Salvar</button>
+                                    </div>
+                                </div>
+
+
+
+                            </form>
+
+                        </div>
+                        <!-- end card-body -->
+                    </div>
+                    <!-- end card-->
+                </div>
+                <!-- end col -->
+            </div>
+            <!-- end row -->
+
+
+
+
+        </div>
+        <!-- container-fluid -->
+
+    </div>
+    <style>
+        .dropzone {
+            zoom: 0.8;
+        }
+    </style>
+
+
+
+
+    <%-include('../partial/footer')%>
+
+        <script>
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        $('#blah').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(input.files[0]); // convert to base64 string
+                }
+            }
+
+            $("#imgInp").change(function() {
+                readURL(this);
+            });
+        </script>

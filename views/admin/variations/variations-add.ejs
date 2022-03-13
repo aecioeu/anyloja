@@ -1,0 +1,96 @@
+<%-include('../partial/header')%>
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+            <div class="row page-title">
+                <div class="col-md-12">
+
+                    <h4 class="mb-1 mt-0">Variações</h4>
+
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-12 col-xl-8">
+                    <div class="card">
+                        <div class="card-body">
+
+
+                            <form class="form-horizontal" method="POST" action="/loja/variations/editor">
+
+                                <input type="hidden" name="id" value="<%-((tags_title) ? (tags_title.id) ? tags_title.id : '' : '') %>">
+
+                                <div class="row">
+                                    <div class="col-xl-12 col-sm-6 col-12"> <label for="simpleinput"></label>
+                                        <div class="custom-control custom-switch mb-2">
+                                            <input type="checkbox" class="custom-control-input" id="customSwitch1" <%-((tags_title) ? (tags_title.active==1 ) ? 'checked' : '' : '') %> name="active">
+                                            <label class="custom-control-label" for="customSwitch1">Ativo</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-12 col-sm-6 col-12"> <label for="simpleinput"></label>
+                                        <div class="custom-control custom-switch mb-2">
+                                            <input type="checkbox" class="custom-control-input" id="customSwitch2" name="required" <%-((tags_title) ? (tags_title.required==1 ) ? 'checked' : '' : '') %>>
+                                            <label class="custom-control-label" for="customSwitch2">Seleção Obrigatoria
+                                        </label>
+                                            <small style="display: block; line-height: 13px;">(Se marcado, o cliente tem
+                                            que selecionar uma das variações, se hoverem.)</small>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-12 col-sm-6">
+                                        <div class="form-group mt-3 mt-sm-0">
+                                            <label for="simpleinput">Variação</label>
+                                            <input type="text" class="form-control" id="simpleinput" name="name" value="<%-((tags_title) ? (tags_title.name) ? tags_title.name : '' : '') %>" placeholder="Nome da Variação">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-4 col-sm-4">
+                                        <button type="submit" class="form-control btn btn-success">Salvar</button>
+
+                                    </div>
+                                </div>
+
+
+
+
+                            </form>
+
+                        </div>
+
+
+                        <!-- end card-body -->
+                    </div>
+
+                    <%if(tags_title){%>
+                        <%if(tags_title.id){%>
+
+                            <div class="row">
+                                <div class="col-xl-6 col-sm-6">
+                                    <a href="#" onclick="deleteVariations('<%=tags_title.id %>')" class="form-control btn btn-danger">Excluir essa variação</a>
+                                    <p class="sub-header mt-2">Ao excluir, todos os produtos que contenham opcões dasta variação, não a terão mais disponível para seleção ou exibição.</p>
+                                </div>
+                            </div>
+                            <%}%>
+                                <%}%>
+                                    <!-- end card-->
+                </div>
+                <!-- end col -->
+            </div>
+            <!-- end row -->
+
+
+
+
+        </div>
+        <!-- container-fluid -->
+
+    </div>
+
+
+
+    <%-include('../partial/footer')%>

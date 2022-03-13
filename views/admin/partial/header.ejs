@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Gerenciador da Loja</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta content="Administração da lojinha" name="description" />
+    <meta content="Coderthemes" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="ScreenOrientation" content="autoRotate:disabled">
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="/assets.site/images/logo-v4.svg">
+
+    <!-- plugins -->
+    <link href="/assets.admin/libs/flatpickr/flatpickr.min.css" rel="stylesheet" type="text/css" />
+
+
+    <!-- plugins -->
+    <link href="/assets.admin/libs/dropzone/dropzone.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- App css -->
+    <link href="/assets.admin/libs/select2/select2.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets.admin/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets.admin/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets.admin/css/app.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/lineicons.min.css" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <script src="/assets.admin/js/yall.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", yall);
+    </script>
+</head>
+
+<body>
+    <!-- Begin page -->
+    <div id="wrapper">
+
+        <!-- Topbar Start -->
+        <div class="navbar navbar-expand flex-column flex-md-row navbar-custom">
+            <div class="container-fluid">
+                <!-- LOGO -->
+                <a href="/loja/dashboard" class="navbar-brand mr-0 mr-md-2 logo" style="display: flex;">
+                    <img src="/assets.site/images/logo-v4.svg" style="height: 35px;"> <span class="logo">anyloja</span>
+                </a>
+
+                <ul class="navbar-nav bd-navbar-nav flex-row list-unstyled menu-left mb-0">
+                    <li class="">
+                        <button class="button-menu-mobile open-left disable-btn ">
+                            <i data-feather="menu" class="menu-icon"></i>
+                            <i data-feather="x" class="close-icon"></i>
+                        </button>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav flex-row ml-auto d-flex list-unstyled topnav-menu float-right mb-0">
+
+
+                    <li class="dropdown notification-list" data-toggle="tooltip" data-placement="left" title="Settings">
+                        <a href="javascript:void(0);" class="nav-link right-bar-toggle">
+                            <i data-feather="settings"></i>
+                        </a>
+                    </li>
+
+
+                </ul>
+            </div>
+
+        </div>
+        <!-- end Topbar -->
+
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="left-side-menu">
+
+
+            <div class="sidebar-content">
+                <!--- Sidemenu -->
+                <div id="sidebar-menu" class="slimscroll-menu">
+                    <ul class="metismenu" id="menu-bar">
+                        <li>
+                            <a target="_blanck" href="/<%=store.cod%>">
+                                <i data-feather="eye"></i>
+                                <span> Ver Loja </span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/loja/dashboard">
+                                <i data-feather="home"></i>
+                                <span> Principal </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/loja/orders">
+                                <i data-feather="book-open"></i>
+                                <span> Pedidos </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/loja/categories">
+                                <i data-feather="shopping-bag"></i>
+                                <span> Produtos </span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/loja/variations">
+                                <i data-feather="git-pull-request"></i>
+                                <span> Variações </span>
+                            </a>
+                        </li>
+
+
+
+                        <li class="menu-title">Marketing</li>
+                        <li>
+                            <a href="/loja/stories">
+                                <i data-feather="video"></i>
+                                <span> Stories </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/loja/banners">
+                                <i data-feather="image"></i>
+                                <span> Banners </span>
+                            </a>
+                        </li>
+
+
+
+                        <li class="menu-title">Configurações</li>
+                        <li>
+                            <a href="/loja/store">
+                                <i data-feather="award"></i>
+                                <span> Loja </span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/loja/sellers">
+                                <i data-feather="users"></i>
+                                <span> Vendedores </span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/loja/logout">
+                                <i data-feather="log-out"></i>
+                                <span> Sair </span>
+                            </a>
+                        </li>
+
+
+
+
+                    </ul>
+                </div>
+                <!-- End Sidebar -->
+
+                <div class="clearfix"></div>
+            </div>
+            <!-- Sidebar -left -->
+
+        </div>
+        <!-- Left Sidebar End -->
+
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+
+
+        <div class="content-page">

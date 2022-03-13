@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Acesse sua Loja</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="." name="description" />
+    <meta content="Coderthemes" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+
+    <!-- App favicon -->
+    <link rel="icon" href="/assets.site/images/logo-v4.svg" type="image/png" sizes="16x16">
+
+    <!-- App css -->
+    <link href="/assets.admin/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets.admin/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets.admin/css/app.min.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body class="authentication-bg">
+
+    <div class="account-pages my-3">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-sm-12 col-md-6 col-xl-6 ">
+                    <div class="card">
+                        <div class="card-body p-0">
+                            <div class="row">
+                                <div class="col-lg-12 p-5">
+                                    <div class="mx-auto mb-5">
+                                        <a href="/">
+                                            <img src="/assets.site/images/logo-v4.svg" style="height: 40px;"> <span class="logo">anyloja</span>
+                                        </a>
+                                    </div>
+
+                                    <h6 class="h5 mb-0 mt-4">Criar Sua Conta</h6>
+                                    <p class="text-muted mt-0 mb-4">Crie sua conta e comece a vender no whatsapp agora.
+                                    </p>
+
+                                    <form action="/loja/signup" method="POST" class="authentication-form">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Nome da Sua Loja</label>
+                                            <div class="input-group input-group-merge">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="icon-dual" data-feather="user"></i>
+                                                    </span>
+                                                </div>
+                                                <input type="text" class="form-control" id="name" name="name" placeholder="Nome da Loja">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="form-control-label">Seu e-mail</label>
+                                            <div class="input-group input-group-merge">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="icon-dual" data-feather="mail"></i>
+                                                    </span>
+                                                </div>
+                                                <input type="email" class="form-control" id="email" name="email" placeholder="sualoja@email.com">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group ">
+                                            <label class="form-control-label">Sua Senha</label>
+                                            <div class="input-group input-group-merge">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="icon-dual" data-feather="lock"></i>
+                                                    </span>
+                                                </div>
+                                                <input type="password" class="form-control" id="password" name="password" placeholder="Uma senha segura">
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="form-group mb-0 text-center">
+                                            <button class="btn btn-primary btn-block" type="submit">Começar a
+                                                Vender</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                        <!-- end card-body -->
+                    </div>
+                    <!-- end card -->
+
+                    <div class="row mt-3">
+                        <div class="col-12 text-center">
+                            <p class="text-muted">Já tem uma conta ? <a href="/loja/login" class="text-primary font-weight-bold ml-1">Entrar</a></p>
+                        </div>
+                        <!-- end col -->
+                    </div>
+                    <!-- end row -->
+
+                </div>
+                <!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </div>
+    <!-- end page -->
+
+    <!-- Vendor js -->
+    <script src="/assets.admin/js/vendor.min.js"></script>
+
+    <!-- App js -->
+    <script src="/assets.admin/js/app.min.js"></script>
+
+</body>
+
+</html>

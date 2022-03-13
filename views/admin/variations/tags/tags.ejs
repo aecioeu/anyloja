@@ -1,0 +1,93 @@
+<%-include('../../partial/header')%>
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+            <div class="row page-title">
+                <div class="col-xl-6 col-sm-6 mb-3">
+                    <a href="/loja/variations/<%=tags_title.id%>/tags/create" class="form-control btn btn-success">Adicionar
+                    Opções</a>
+                </div>
+
+                <div class="col-md-12">
+                    <h4 class="mt-1 mb-2"><a href="/loja/variations">Variações de Produto</a> /
+                        <%=tags_title.name%>
+                    </h4>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <%if(tags.length >0){%>
+
+                    <% tags.forEach((tag, index) => { %>
+
+
+                        <div class="col-12 col-xl-3 col-md-4 col-sm-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="dropdown float-right">
+                                        <a href="#" class="dropdown-toggle text-muted arrow-none" data-toggle="dropdown" aria-expanded="false" draggable="false">
+                                            <i class="uil uil-ellipsis-v font-size-14"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(16px, 19px, 0px);">
+                                            <!-- item-->
+                                            <a href="/loja/variations/<%=tag.id%>/tags/edit/" class="dropdown-item" draggable="false"><i class="uil uil-edit-alt mr-2"></i>Editar Variação <strong>
+                                        <%=tag.name %> </strong></a>
+
+                                        </div>
+                                    </div>
+                                    <div class="media">
+                                        <div class="media-body">
+
+
+                                            <div class="col-12">
+                                                <h6 class="mt-0 mb-0 font-19">
+                                                    <%=tag.name %>
+                                                        <%-((tag.active==1 ) ? '<span class="badge badge-soft-success p-1 font-12">ATIVO</span>': '<span class="badge badge-soft-primary p-1 font-12">INATIVO</span>' ) %>
+                                                </h6>
+                                            </div>
+                                            <div class="col-12 ">
+                                                <!-- <div class="custom-control custom-switch mb-2 mt-2">
+                                                    <input type="checkbox" class="custom-control-input id-category" id-active="<%=tag.id %>" id="customSwitch<%=tag.id %>" <%=((tag.active==1 ) ? 'checked': '' ) %>>
+                                                    <label class="custom-control-label" for="customSwitch<%=tag.id %>">
+                                            Mostrar
+                                        </label>
+                                                </div>-->
+
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <% }) %>
+                            <%}else{%>
+                                <div class="col-md-6">
+                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                        Cadastre um filtro para começar a adicionar opções.
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                                    </div>
+                                </div>
+                                <%}%>
+
+
+            </div>
+
+
+        </div>
+        <!-- container-fluid -->
+
+    </div>
+
+
+
+
+    <%-include('../../partial/footer')%>

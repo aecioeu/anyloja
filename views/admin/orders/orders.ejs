@@ -1,0 +1,91 @@
+<%-include('../partial/header')%>
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+            <div class="row mt-3 align-items-center">
+                <div class="col-sm-4 col-xl-6">
+                    <h4 class="mb-1 mt-0">👇 Seus Pedidos
+
+                    </h4>
+                </div>
+                <div class="col-sm-8 col-xl-6 mb-2">
+                    <form class="form-inline float-sm-right mt-3 mt-sm-0">
+                        <div class="form-group mb-sm-0 mr-2">
+                            <input type="text" class="form-control" id="order-daterange" style="min-width: 190px;" value="<%-((time) ? time : '')%>" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+            <div class="row">
+
+                <div class="col-12 col-md-10  col-xl-10">
+
+                    <div class="card">
+                        <div class="card-body" style="padding: 0.8rem;">
+                            <ul class="nav nav-pills navtab-bg nav-justified" id="pills-tab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="analitc" data-toggle="pill" href="#pills-activity" role="tab" aria-controls="pills-activity" aria-selected="true">
+                                    Analítico
+                                </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="pills-messages-tab" data-toggle="pill" href="#pills-messages" role="tab" aria-controls="pills-messages" aria-selected="false">
+                                    Gráfico
+                                </a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" id="pills-tabContent" style="
+                            margin-left: 10px;
+                            margin-right: 10px;
+                        ">
+                                <div class="tab-pane fade active show" id="pills-activity" role="tabpanel" aria-labelledby="pills-activity-tab">
+                                    <h5 class="mb-2">Timeline de vendas</h5>
+                                    <h3 class="mb-2 pb-3 total border-bottom"></h3>
+
+                                    <div class="order-list">
+                                    </div>
+
+
+
+                                </div>
+
+                                <!-- messages -->
+                                <div class="tab-pane" id="pills-messages" role="tabpanel" aria-labelledby="pills-messages-tab">
+
+                                    <div class="card">
+                                        <div class=" pb-0">
+
+                                            <h5 class="card-title mb-0 header-title">Evolução das Vendas por Whatsapp</h5>
+                                            <div id="revenue-chart" class="apex-charts mt-3" dir="ltr"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+
+
+        </div>
+        <!-- container-fluid -->
+
+    </div>
+
+
+    <%-include('../partial/footer')%>

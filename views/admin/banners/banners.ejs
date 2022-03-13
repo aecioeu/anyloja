@@ -1,0 +1,126 @@
+<%-include('../partial/header')%>
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+            <div class="row page-title">
+                <div class="col-md-12">
+
+                    <h4 class="mb-1 mt-0 mb-2">Banners sendo Exibidos</h4>
+                    <span class="img-preview"></span>
+
+                    <div class="row banners" id="banners">
+
+
+                    </div>
+
+
+                    <div id="template-preview">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-xl-6">
+                <div class="card">
+                    <div class="card-body">
+
+
+                        <input type="hidden" id="store_folder" name="store_folder" value='<%=store.folder%>'>
+                        <div class="row">
+                            <div class="col-xl-12 col-sm-12">
+                                <label for="simpleinput"></label>
+                                <div class="dropzone dz-clickable mb-3" id="mydropzoneBanners" name="mainFileUploader">
+
+                                    <div class="fallback">
+                                        <input name="file" type="file" multiple />
+                                    </div>
+
+                                    <div class="dz-message needsclick">
+                                        <i class="h1 text-muted  uil-cloud-upload"></i>
+                                        <h3>Arraste seu Banner para essa area.</h3> <small>(imagens con largura maior que
+                                        940px serão redimensionadas)</small>
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+                    <!-- end card-body -->
+                </div>
+                <!-- end card-->
+            </div>
+            <!-- end col -->
+        </div>
+        <!-- end row -->
+
+
+
+
+    </div>
+    <!-- container-fluid -->
+
+    </div>
+    <style>
+        .dropzone {
+            zoom: 0.8;
+        }
+    </style>
+
+
+
+
+
+    <div id="subvariation" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">Sub-Variações</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <div class=" subvarbody"></div>
+
+                    <span class="subvariations_done form-control btn btn-success ">Concluir
+                </span>
+                </div>
+
+
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+
+
+
+    <%-include('../partial/footer')%>
+
+
+        <!-- Latest Sortable -->
+        <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+        <script>
+            new Sortable(document.getElementById('banners'), {
+                handle: '.move',
+                //draggable: 'card',
+                animation: 150, // ms, animation speed moving items when sorting, `0` — without animation
+                easing: "cubic-bezier(1, 0, 0, 1)", // Easing for animation. Defaults to null. See https://easings.net/ for examples.
+                // Element dragging ended
+                onEnd: function( /**Event*/ evt) {
+                    UpdateOrderBanners()
+                }
+            })
+        </script>

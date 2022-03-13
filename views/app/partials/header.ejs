@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover, shrink-to-fit=no">
+    <meta name="description" content="<%-((description) ? description: `Catalogo virtual com todos os nosssos produtos.`)%>">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- The above tags *must* come first in the head, any other head content must come *after* these tags-->
+    <!-- Title-->
+    <!--News Updates-->
+    <title>
+        <%-`${((title) ? title : `${store.name} - Catálogo Virtual`)}`%>
+    </title>
+    <!-- Favicon-->
+
+    <link rel="icon" href="<%=((store.logo) ? `/media/${store.folder}/logo/logo32.webp` : `/media/no-pic.jpg`)%>">
+    <!-- Apple Touch Icon-->
+    <link rel="apple-touch-icon" href="<%=((store.logo) ? `/media/${store.folder}/logo/logo96.webp` : `/media/no-pic.jpg`)%>">
+    <link rel="apple-touch-icon" sizes="152x152" href="<%=((store.logo) ? `/media/${store.folder}/logo/logo152.webp` : `/media/no-pic.jpg`)%>">
+    <link rel="apple-touch-icon" sizes="167x167" href="<%=((store.logo) ? `/media/${store.folder}/logo/logo167.webp` : `/media/no-pic.jpg`)%>">
+    <link rel="apple-touch-icon" sizes="180x180" href="<%=((store.logo) ? `/media/${store.folder}/logo/logo180.webp` : `/media/no-pic.jpg`)%>">
+    <!-- Stylesheet-->
+    <!-- Web App Manifest-->
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;600;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/style-master.min.css?v=1.0.5">
+
+    <!--
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+-->
+    <style>
+        .owl-carousel {
+            touch-action: manipulation;
+        }
+    </style>
+
+    <%if(store.pixel > 10){%>
+        <!-- Facebook Pixel Code -->
+        <script>
+            ! function(f, b, e, v, n, t, s) {
+                if (f.fbq) return;
+                n = f.fbq = function() {
+                    n.callMethod ?
+                        n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+                };
+                if (!f._fbq) f._fbq = n;
+                n.push = n;
+                n.loaded = !0;
+                n.version = '2.0';
+                n.queue = [];
+                t = b.createElement(e);
+                t.async = !0;
+                t.src = v;
+                s = b.getElementsByTagName(e)[0];
+                s.parentNode.insertBefore(t, s)
+            }(window, document, 'script',
+                'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '<%-store.pixel%>');
+            fbq('track', 'PageView');
+        </script>
+        <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=<%-store.pixel%>&ev=PageView&noscript=1" /></noscript>
+        <!-- End Facebook Pixel Code -->
+        <%}else{%>
+            <script>
+                function fbq() {
+                    console.log('pixel não configurado')
+                }
+            </script>
+            <%}%>
+
+</head>
+
+<body>
+    <div id="storytime"></div>
+    <!-- Preloader-->
+    <!--<div class="preloader" id="preloader">
+        <div class="spinner-grow text-secondary" role="status">
+            <div class="sr-only">Carregando...</div>
+        </div>
+    </div>-->
+
+    <!-- Header Area-->
+    <div class="header-area" id="headerArea">
+        <div class="container h-100 d-flex align-items-center justify-content-between">
+            <% if(back == 'false'){%>
+                <div class="suha-navbar-toggler d-flex flex-wrap filter" id="suhaNavbarToggler">
+                    <span></span><span></span><span></span></div>
+                <% }%>
+
+                    <!-- Logo Wrapper-->
+                    <%if(back == 'true'){%>
+                        <div class="back-button">
+                            <a href="javascript:history.back()"><svg class="icon">
+                <use xlink:href="#back"></use>
+            </svg></a>
+                        </div>
+                        <% } else if(back == 'home'){%>
+                            <div class="back-button">
+                                <a href="/<%=store.cod%>"><svg class="icon">
+                <use xlink:href="#back"></use>
+            </svg></a>
+                            </div>
+                            <% }%>
+
+                                <!-- Search Form-->
+                                <h6 class="titlehome" style="margin-bottom:0;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;">
+
+
+                                    <%if(back == 'home'){%>
+                                        <a href="/<%=store.cod%>">
+                                            <%=header%>
+                                        </a>
+                                        <% }
+                                 else if(back == 'true'){%>
+                                            <a href="javascript:history.back()">
+                                                <%=header%>
+                                            </a>
+                                            <% }
+                                
+                                else{%>
+                                                Nosso Catálogo
+
+                                                <%}%>
+                                </h6>
+
+
+                                <a href="/cart/<%=store.cod%>"><span class="cart-qnt">0</span>
+        <svg class="icon">
+            <use xlink:href="#cart"></use>
+        </svg>
+        </a>
+        </div>
+    </div>

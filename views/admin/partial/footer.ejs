@@ -1,0 +1,362 @@
+<!-- Footer Start -->
+<footer class="footer">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                anyloja <small> - 😎 Descomplicando Vendas pela Internet</small>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- end Footer -->
+
+</div>
+
+<!-- ============================================================== -->
+<!-- End Page content -->
+<!-- ============================================================== -->
+
+
+</div>
+<!-- END wrapper -->
+
+<!-- Right Sidebar -->
+<div class="right-bar">
+    <div class="rightbar-title">
+        <a href="javascript:void(0);" class="right-bar-toggle float-right">
+            <i data-feather="x-circle"></i>
+        </a>
+        <h5 class="m-0">Olá,
+            <%=store.name%>
+        </h5>
+    </div>
+
+    <div class="slimscroll-menu">
+
+
+
+        <div class="dropdown-divider"></div>
+
+        <a href="/loja/logout" class="dropdown-item notify-item">
+            <i data-feather="log-out" class="icon-dual icon-xs mr-2"></i>
+            <span>Sair</span>
+        </a>
+
+    </div>
+    <!-- end slimscroll-menu-->
+</div>
+<!-- /Right-bar -->
+
+<!-- Right bar overlay-->
+<div class="rightbar-overlay"></div>
+
+<!-- Vendor js -->
+<script src="/assets.admin/js/vendor.min.js"></script>
+
+<!-- Plugins js -->
+<script src="/assets.admin/libs/dropzone/dropzone.min.js"></script>
+<script src="/assets.admin/libs/select2/select2.min.js"></script>
+<script>
+    //.prop('required', true).trigger('change');
+    $('.select2-selection').on('focus', function() {
+        $(this).trigger('blur')
+    })
+
+    $('[data-plugin="customselect"]').select2({
+        closeOnSelect: false,
+
+    }).on("select2:open", function(e) {
+
+        let intViewportHeight = window.innerHeight;
+        console.log(intViewportHeight - 70)
+        setTimeout(() => {
+            $(".select2-results__group").each(function() {
+                text = $(this).text().replace('*required*',
+                    '<span class="badge badge-soft-danger p-1">SELEÇÃO OBRIGATÓRIA</span><br><small>Na página do produto</small>'
+                )
+                $(this).html(text)
+            });
+        }, 100);
+
+        $('.complete-select2').animate({
+            'top': intViewportHeight - 70
+        }, 100);
+
+        window.addEventListener("resize", function() {
+
+            if ($(".select2-container--open")[0]) {
+                // Do something if class exists
+                console.log(window.innerHeight - 70);
+                $('.complete-select2').animate({
+                    'top': window.innerHeight - 70
+                }, 0);
+            } else {
+                // Do something if class does not exist
+                console.log('nao existe')
+            }
+
+
+        });
+
+        /*$('.complete-select2').animate({
+            'bottom': '0px'
+        }, 100);*/
+
+    }).on("select2:close", function(e) {
+
+        //log("select2:close", e); 
+        console.log($('[data-plugin="customselect"]').select2('val').toString());
+        $('.complete-select2').animate({
+            'top': window.innerHeight + 180
+        }, 100);
+    })
+
+    $('.finalizar').on('click', function() {
+
+        $('body').click();
+        /*$('.complete-select2').animate({
+            'bottom': '-75px'
+        }, 100);*/
+
+    });
+
+    //
+</script>
+
+<script>
+    $(document).ready(function() {
+
+        // Initialize Select2
+        $('#sel_users').select2();
+
+        // Set option selected onchange
+        $('#user_selected').change(function() {
+            var value = $(this).val();
+
+            // Set selected 
+            $('#sel_users').val(value);
+            $('#sel_users').select2().trigger('change');
+
+        });
+    });
+</script>
+<style>
+    .select2-offscreen,
+    .select2-offscreen:focus {
+        left: auto !important;
+        top: auto !important;
+    }
+    
+    .media {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        -webkit-box-align: start;
+        -ms-flex-align: start;
+        align-items: flex-start;
+    }
+    
+    .float-right {
+        float: right !important;
+        top: -10px;
+        right: -15px;
+    }
+    
+    @media (max-width: 920px) {
+        .cell-img+.cell-img {
+            margin-left: -95px;
+        }
+    }
+    
+    .select2 {
+        width: 100% !important;
+    }
+    
+    .select2-container .select2-selection--multiple .select2-search__field {
+        display: none;
+    }
+    
+    .select2-container--default .select2-results__option[aria-selected=true] {
+        background-color: #5369f8;
+        color: #fff;
+        border-radius: 5px;
+    }
+    /* .select2-container--default .select2-results__option--highlighted[aria-selected]:after {
+        content: "asasdd";
+    }*/
+    
+    .select2-container--default .select2-results__option--highlighted[aria-selected=true] {
+        background-color: #5369f8;
+        border: 1px solid #fff;
+        color: #fff;
+    }
+    
+    .select2-container--default .select2-results__option--highlighted[aria-selected=false] {
+        background-color: #fff;
+        color: #6c757d;
+    }
+    
+    .select2-container--default .select2-results__option[aria-selected=true]:hover {
+        background-color: #5369f8;
+        border: 1px solid #fff;
+        color: #fff;
+    }
+    
+    .select2-container--default .select2-results__option .select2-results__option {
+        padding-left: 1em;
+        margin-bottom: 5px;
+        border: 1px solid #f3f3f3;
+        border-radius: 5px;
+    }
+    
+    .select2-results__option {
+        padding: 6px 16px;
+    }
+    /*.select2-container--default .select2-results__option[aria-selected=true]:before {
+        content: '✓';
+        font-size: 20px;
+        margin: 0px 10px 0px -3px;
+        text-decoration: none;
+    }*/
+    
+    .complete-select2 {
+        padding: 15px 15px;
+        z-index: 9999;
+        position: fixed;
+        height: 70px;
+        background-color: #ffffff;
+        bottom: -75px;
+        left: 0px;
+        right: 0px;
+        webkit-box-shadow: 0 -6px 12px rgb(15 15 15 / 15%);
+        box-shadow: 0 -6px 12px rgb(15 15 15 / 15%);
+        /* margin-bottom: 15px; */
+    }
+    
+    .select2-container .select2-selection--multiple .select2-selection__choice__remove {
+        color: #fff;
+        margin-right: 5px;
+        display: none;
+    }
+    
+    .select2-container--default .select2-results>.select2-results__options {
+        max-height: 200px;
+        overflow-y: auto;
+        padding: 10px;
+    }
+    
+    @media only screen and (max-width: 5000px) {
+        #sidebar-menu>ul>li>a {
+            font-size: 17px;
+        }
+        .btn {
+            font-size: 17px;
+        }
+        input[type="color"],
+        input[type="date"],
+        input[type="datetime"],
+        input[type="datetime-local"],
+        input[type="email"],
+        input[type="month"],
+        input[type="number"],
+        input[type="password"],
+        input[type="search"],
+        input[type="tel"],
+        input[type="text"],
+        input[type="time"],
+        input[type="url"],
+        input[type="week"],
+        select:focus,
+        textarea {
+            font-size: 17px !important;
+        }
+        body {
+            font-size: 17px !important;
+        }
+        input[type="text"] {
+            font-size: inherit;
+        }
+        .card-body {
+            font-size: 17px !important;
+        }
+        /*   .select2-container--open .select2-dropdown--below {
+            position: fixed !important;
+            top: 71px !important;
+            width: 100% !important;
+            height: calc(100vh - 71px) !important;
+        }
+        .select2-results {
+            visibility: hidden;
+        }
+        .select2-container .select2-dropdown .select2-results .select2-results__options {
+            max-height: calc(100vh - 131px);
+        }*/
+        .select2-container--default .select2-results__option .select2-results__option {
+            padding-left: 1em;
+            margin-bottom: 5px;
+            border: 1px solid #f3f3f3;
+            border-radius: 5px;
+            display: inline-block;
+            margin-left: 5px;
+        }
+        .select2-dropdown {
+            /*height: 100vh !important;*/
+            height: calc(100vh + 170px) !important;
+            width: 100vw !important;
+            position: fixed;
+            top: 0;
+            left: 0
+        }
+        .select2-results__options {
+            max-height: 100vh !important;
+        }
+        .select2-results {
+            font-size: 20px;
+        }
+        .select2-container--default .select2-results>.select2-results__options {
+            padding: 20px 20px 200px 20px;
+            height: calc(100% - 70px);
+        }
+    }
+</style>
+
+<!-- optional plugins -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"></script>
+
+<script src="/assets.admin/libs/moment/moment.min.js"></script>
+<script src="/assets.admin/libs/apexcharts/apexcharts.min.js"></script>
+<script src="/assets.admin/libs/flatpickr/flatpickr.min.js"></script>
+<!-- page js -->
+<script src="/assets.admin/js/pages/dashboard.init.js"></script>
+<!-- App js -->
+
+<script src="/assets.admin/js/app.min.js"></script>
+
+<script type="text/javascript" src="https://www.gstatic.com/firebasejs/5.7.1/firebase-app.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/firebasejs/5.7.1/firebase-messaging.js"></script>
+
+<script type="text/javascript" src="/assets.admin/js/notification/init.js?v=1.0.2"></script>
+<script type="text/javascript" src="/assets.admin/js/notification/notification.js?v=1.0.2"></script>
+
+<script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/firebase-messaging-sw.js', {
+            scope: '/loja/dashboard'
+        }).then(function(registration) {
+            // registration worked
+
+            console.log('Registration succeeded.');
+            requestPermission()
+
+        }).catch(function(error) {
+            // registration failed
+
+            console.log('Registration failed with ' + error);
+        });
+    };
+</script>
+
+
+</body>
+
+</html>

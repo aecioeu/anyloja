@@ -1,0 +1,9 @@
+sessions
+temp
+arquivos
+videos
+critical.js
+node_modules
+config/https.js
+public/media
+package-lock.json

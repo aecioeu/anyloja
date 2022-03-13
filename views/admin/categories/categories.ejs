@@ -1,0 +1,124 @@
+<%-include('../partial/header')%>
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+            <div class="row page-title">
+
+
+                <div class="col-xl-6 col-sm-6 mb-3">
+                    <a href="/loja/categories/create" class="form-control btn btn-success">Adicionar
+                    Categoria</a>
+                </div>
+
+
+                <div class="col-md-12">
+                    <p class="pre-title">Mostrando:</p>
+                    <h4 class="mt-1 mb-2">Suas Categorias</h4>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <%if(categories.length >0){%>
+
+                    <% categories.forEach((categorie, index) => { %>
+
+
+                        <div class="col-12 col-xl-3 col-md-4 col-sm-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="dropdown float-right">
+                                        <a href="#" class="dropdown-toggle text-muted arrow-none" data-toggle="dropdown" aria-expanded="false" draggable="false">
+                                            <i class="uil uil-ellipsis-v font-size-14"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(16px, 19px, 0px);">
+                                            <!-- item-->
+                                            <a href="/loja/categories/edit/<%=categorie.category_id %>" class="dropdown-item" draggable="false"><i class="uil uil-edit-alt mr-2"></i>Editar categoria
+                                    <strong><%=categorie.name %></strong></a>
+
+
+
+                                        </div>
+                                    </div>
+                                    <div class="media">
+                                        <div class="media-body">
+
+                                            <h5 class="mt-0 mb-2">
+
+                                                <%=categorie.name %>
+
+                                                    <%-((categorie.active==1 ) ? '<span class="badge badge-soft-success p-1">ATIVO</span>': '<span class="badge badge-soft-primary p-1">INATIVO</span>' ) %>
+
+                                            </h5>
+                                            <small class="card-text text-muted">
+                                    <%=((categorie.total > 0) ? `${categorie.total} Produtos`: `Nenhum Produto` )%>
+                                </small>
+
+                                            <!--<div class="col-xl-2 col-sm-4 col-6">
+                                                <div class="custom-control custom-switch mb-2 mt-2">
+                                                    <input type="checkbox" class="custom-control-input id-category" id-categorie="<%=categorie.id %>" id="customSwitch<%=categorie.id %>" <%=((categorie.active==1 ) ? 'checked': '' ) %>>
+                                                    <label class="custom-control-label" for="customSwitch<%=categorie.id %>">
+                                            Mostrar
+                                        </label>
+                                                </div>
+                                            </div>-->
+                                            <a href="/loja/categories/<%=categorie.category_id %>" class="btn btn-primary btn-block btn-sm mt-1 mr-1">Ver
+                                    Produtos</a>
+                                            <!-- <a href="/loja/categories/<%=categorie.category_id %>/product/create" class="btn btn-success btn-sm mt-1 mr-1">Adicionar Novo Produto</a>-->
+                                            <!-- <a href="/loja/categories/edit/<%=categorie.category_id %>" class="btn btn-light btn-sm btn-block mr-1">Editar Categoria</a>
+-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <% }) %>
+                            <%}else{%>
+                                <div class="col-md-6">
+                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                        Cadastre uma categoria para começar a adicionar produtos nela.
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                                    </div>
+                                </div>
+                                <%}%>
+
+
+            </div>
+
+
+        </div>
+        <!-- container-fluid -->
+
+    </div>
+
+    <!-- sample modal content -->
+    <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">Escolha um icone</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body icons-show">
+                </div>
+
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <style>
+        .media {
+            display: contents !important;
+        }
+    </style>
+    <%-include('../partial/footer')%>

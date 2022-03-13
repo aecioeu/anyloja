@@ -1,0 +1,356 @@
+<%-include('partial/header')%>
+
+    <div class="content">
+        <style>
+            video {
+                width: 100%;
+                max-height: 80vh;
+                border-radius: 16px;
+                border: 3px solid #c3c4c5;
+            }
+        </style>
+
+
+
+
+
+        <div class="container-fluid">
+
+
+            <div class="row page-title align-items-center">
+                <div class="col-sm-6 col-xl-12">
+                    <h4 class="mb-1 mt-0">👋 Bem vindo,
+                        <%=store.name%>
+
+                    </h4>
+                </div>
+                <div class="col-sm-6 col-xl-6 hide">
+                    <form class="form-inline float-sm-right mt-3 mt-sm-0">
+                        <div class="form-group mb-sm-0 mr-2">
+                            <input type="text" class="form-control" id="dash-daterange" style="min-width: 190px;" />
+
+
+                        </div>
+                    </form>
+                </div>
+                <div class="col-sm-6 col-xl-6">
+                    <div class="card mb-0 shadow-none mb-1 mt-3">
+                        <div class="card-body pt-2">
+
+                            <div class="media pt-3">
+
+                                <div class="media-body">
+
+
+
+                                    <h6 class="mt-0 mb-0 font-size-15">
+                                        Link de comprailhamento da Loja
+                                    </h6>
+
+                                    <p class="text-muted mb-1 url" style="font-size: 13px;">
+                                        https://anyloja.com.br/
+                                        <%=store.cod%>
+                                    </p>
+                                    <button type="submit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Copiado!" class="form-control btn btn-secondary btn-sm" onclick="copyToClipboard('https://anyloja.com.br/<%=store.cod%>')" id="copyButton">Copiar </button>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="row ">
+                <div class="col-md-6 col-xl-6 col-12">
+
+                    <div class="mb-4">
+                        <a class="text-dark" data-toggle="collapse" href="#ajuda" aria-expanded="false" aria-controls="ajuda">
+                            <div class="card mb-0 shadow-none mb-2">
+                                <div class="card-body">
+
+
+                                    <h5 class="mb-0">
+                                        <i class="uil uil-angle-down font-18"></i>Ajuda para começar? 😉<span class="text-muted font-size-14"></span>
+                                    </h5>
+
+                                    <small>Configurar sua loja leva apenas 5 minutos.</small>
+
+                                </div>
+                        </a>
+                        </div>
+
+                        <div class="collapse" id="ajuda">
+                            <div class="card mb-0 shadow-none">
+                                <div class="card-body">
+
+
+
+                                    <!-- task -->
+                                    <div class="row justify-content-sm-between border-bottom">
+                                        <div class="col-lg-12 mb-2 mb-lg-0">
+                                            <span class="">
+                                        Preencher o Perfil da sua Loja
+                                    </span>
+                                            <a href="/loja/store" class="btn btn-success btn-sm float-right ajust-go-button"><i
+                                            class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round"
+                                                class="feather feather-chevron-right">
+                                                <polyline points="9 18 15 12 9 6"></polyline>
+                                            </svg></i></a>
+
+
+                                        </div>
+                                        <!-- end col -->
+
+                                    </div>
+                                    <!-- end task -->
+
+                                    <!-- task -->
+                                    <div class="row justify-content-sm-between border-bottom">
+                                        <div class="col-lg-12 mb-2 mt-2 mb-lg-0">
+                                            <span class="">
+                                        Adicionar Vendedores
+                                    </span>
+                                            <a href="/loja/sellers" class="btn btn-success btn-sm float-right ajust-go-button"><i class="icon"><svg
+                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round"
+                                                class="feather feather-chevron-right">
+                                                <polyline points="9 18 15 12 9 6"></polyline>
+                                            </svg></i></a>
+
+
+                                        </div>
+                                        <!-- end col -->
+
+                                    </div>
+                                    <!-- end task -->
+                                    <!-- task -->
+                                    <div class="row justify-content-sm-between border-bottom">
+                                        <div class="col-lg-12 mb-2 mt-2 mb-lg-0">
+                                            <span class="">
+                                        Adicionar Categorias
+                                    </span>
+                                            <a href="/loja/categories" class="btn btn-success btn-sm float-right ajust-go-button"><i class="icon"><svg
+                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round"
+                                                class="feather feather-chevron-right">
+                                                <polyline points="9 18 15 12 9 6"></polyline>
+                                            </svg></i></a>
+
+                                        </div>
+                                        <!-- end col -->
+
+                                    </div>
+                                    <!-- end task -->
+
+                                    <!-- task -->
+                                    <div class="row justify-content-sm-between border-bottom">
+                                        <div class="col-lg-12 mb-2 mt-2 mb-lg-0">
+                                            <span class="">
+                                        Adicionar Variações
+                                    </span>
+                                            <a href="/loja/variations" class="btn btn-success btn-sm float-right ajust-go-button"><i class="icon"><svg
+                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round"
+                                                class="feather feather-chevron-right">
+                                                <polyline points="9 18 15 12 9 6"></polyline>
+                                            </svg></i></a>
+
+
+                                        </div>
+                                        <!-- end col -->
+
+                                    </div>
+                                    <!-- end task -->
+
+                                    <!-- task -->
+                                    <div class="row justify-content-sm-between border-bottom mt-2">
+                                        <div class="col-lg-12 mb-2  mb-lg-0">
+                                            <span class="">
+                                        Adicionar 1º Produto
+                                    </span>
+                                            <a href="/loja/categories" class="btn btn-success btn-sm float-right ajust-go-button"><i class="icon"><svg
+                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round"
+                                                class="feather feather-chevron-right">
+                                                <polyline points="9 18 15 12 9 6"></polyline>
+                                            </svg></i></a>
+
+                                        </div>
+                                        <!-- end col -->
+
+                                    </div>
+                                    <!-- end task -->
+
+                                    <!-- task -->
+                                    <div class="row justify-content-sm-between  mt-2">
+                                        <div class="col-lg-12 mb-2  mb-lg-0">
+                                            <span class="">
+                                        Aprender sobre Stories e Banners
+                                    </span>
+                                            <a href="#" class="btn btn-success btn-sm float-right ajust-go-button"><i
+                                            class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round"
+                                                class="feather feather-chevron-right">
+                                                <polyline points="9 18 15 12 9 6"></polyline>
+                                            </svg></i></a>
+
+                                        </div>
+                                        <!-- end col -->
+
+                                    </div>
+                                    <!-- end task -->
+
+
+                                </div>
+                                <!-- end card-body-->
+                            </div>
+                            <!-- end card -->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- content -->
+            <div class="row dashboard_info">
+
+                <div class="col-md-6 col-xl-3 col-12">
+                    <div class="card">
+                        <div class="card-body p-0">
+
+                            <div class="media px-3 py-3">
+                                <div class="media-body">
+                                    <h2 class="mb-0 mb-1 load sum_orders" style="
+                                    color: #25d366;
+                                ">
+                                    </h2>
+
+                                    <span class="text-muted">em pedidos</span>
+                                </div>
+                                <i data-feather="shopping-bag" class="align-self-center icon-dual icon-lg"></i>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6 col-xl-3 col-6">
+                    <div class="card">
+                        <div class="card-body p-0">
+                            <div class="media p-3">
+                                <div class="media-body">
+                                    <span class="text-muted text-uppercase font-size-12 font-weight-bold">Pedidos</span>
+                                    <h2 class="mb-0 load total_orders">
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-xl-3 col-6">
+                    <div class="card">
+                        <div class="card-body p-0">
+                            <div class="media p-3">
+                                <div class="media-body">
+                                    <span class="text-muted text-uppercase font-size-12 font-weight-bold">Ticket
+                                Medio</span>
+                                    <h2 class="mb-0 load ticket"></h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-6 col-lg-6">
+
+                    <a href="" class="order_views form-control btn btn-secondary mb-3">
+                Meus Pedidos</a>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- widgets -->
+            <h5 class="mb-0 header-title sellers_info">Seus Vendedores</h5>
+            <small class="sub-header">
+        Com esse link o cliente é direcionado diretamente para o vendedor, sem necessidade de escolher um vendedor para
+        finalizar.
+    </small>
+            <div class="row sellers_info mt-3">
+
+
+                <%if(sellers.length >0){%>
+
+                    <% sellers.forEach((seller, index) => { %>
+
+                        <div class="col-xl-4 col-sm-6">
+                            <div class="card">
+                                <div class="card-body pt-2">
+
+                                    <div class="media pt-3">
+
+                                        <div class="media-body">
+
+
+
+                                            <h6 class="mt-1 mb-0 font-size-15">
+                                                <%=seller.name%>
+                                            </h6>
+                                            <h6 class="text-muted font-weight-normal mt-1 ">
+                                                <%=seller.phone%>
+                                            </h6>
+                                            <p class="text-muted mb-1 url" style="font-size: 13px;">
+                                                <%=`https://anyloja.com.br/${store.cod}/${seller.url}`%>
+                                            </p>
+                                            <button type="submit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Copiado!" class="form-control btn btn-secondary" onclick="copyToClipboard('<%=`https://anyloja.com.br/${store.cod}/${seller.url}`%>')" id="copyButton">Copiar link do
+                                Vendedor</button>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <% }) %>
+                            <%}else{%>
+                                <div class="col-xl-6 col-lg-6">
+
+                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                        Cadastre um vendedor para enviar o link da sua loja e começar a receber pedidos.
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                                    </div>
+
+                                    <a href="/loja/sellers" class="form-control btn btn-success">Cadastrar um vendedor</a>
+
+                                </div>
+                                <%}%>
+
+
+
+
+
+            </div>
+            <!-- end row -->
+
+        </div>
+    </div>
+    <!-- content -->
+
+
+    <%-include('partial/footer')%>

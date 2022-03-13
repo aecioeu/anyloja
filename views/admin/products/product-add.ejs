@@ -1,0 +1,164 @@
+<%-include('../partial/header')%>
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+            <div class="row page-title">
+                <div class="col-md-12">
+
+                    <h4 class="mb-1 mt-0">Criar Produto</h4>
+
+                </div>
+            </div>
+
+
+
+
+            <div class="row">
+                <div class="col-12 col-xl-8">
+                    <div class="card">
+                        <div class="card-body">
+
+
+
+                            <form id="product" method="post" action="/loja/<%=category_from.category_id%>/create/product" class="needs-validation form-horizontal" novalidate>
+
+
+                                <div class="row">
+                                    <div class="col-xl-12 col-sm-6 col-12">
+                                        <div class="custom-control custom-switch mb-2">
+                                            <input type="checkbox" class="custom-control-input" id="active" name="active" checked>
+                                            <label class="custom-control-label" for="active">Mostrar
+                                            Produto</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-12 col-sm-6 col-12">
+                                        <div class="custom-control custom-switch mb-2">
+                                            <input type="checkbox" class="custom-control-input" id="featured" name="featured">
+                                            <label class="custom-control-label" for="featured">Destacar Produto</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-12 col-sm-4">
+                                        <div class="form-group mt-3 mt-sm-0">
+
+                                            <label>Categorias do Produto</label>
+                                            <select class="form-control wide" name="categories" data-plugin="customselect" multiple required="required" data-placeholder="Escolha uma Categoria">
+                                            <optgroup label="Categorias do Produto">
+                                                <%if(category.length > 0){%>
+                                                <% category.forEach((categorie, index) => { %>
+                                                <%-((category_from.category_id == categorie.category_id) ? `<option value="${categorie.category_id}" selected>${categorie.name}</option>` : `<option value="${categorie.category_id}">${categorie.name}</option>`)%>
+                                                <%  }) %>
+                                                <%  } %>
+                                            </optgroup>
+
+                                        </select>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-12 col-sm-4">
+                                        <div class="form-group">
+                                            <label for="simpleinput">Nome do Produto</label>
+                                            <input type="text" class="form-control" id="simpleinput" name="name" value="" placeholder="Nome do Produto" required>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-12 col-sm-4">
+                                        <div class="form-group mt-0 mt-sm-0">
+
+                                            <label>Variações do Produto</label>
+                                            <select class="form-control wide" name="tags" data-placeholder="Variações do Produto" data-plugin="customselect" multiple aria-multiselectable='true' data-placeholder="Escolha">
+
+
+                                            <%if(tags.length > 0){%>
+
+                                            <% tags.forEach((title, index) => { %>
+                                            <optgroup
+                                                label="<%=title.tag_title%><%-(title.required == 1) ? ' *required*' : ''%>">
+                                                asda
+                                                <% title.tags.forEach((tag, index) => { %>
+                                                <%-`<option value="${tag.id}">${tag.name}</option>`%>
+
+                                                <%  }) %>
+                                            </optgroup>
+                                            <%  }) %>
+
+                                            <%  } %>
+
+
+                                        </select>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-12 col-sm-12">
+                                        <div class="form-group">
+                                            <label for="simpleinput">Descrição</label>
+                                            <textarea name="description" class="form-control" value="" placeholder="Descrição do Produto" rows="3" cols="33"></textarea>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="simpleinput">Preço</label>
+                                            <input type="text" class="form-control" pattern="\d+((\(|)|-)\d+)?" inputmode="numeric" onkeyup="k(this);" name="price" value="" placeholder="0.00">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="simpleinput">Desconto</label>
+                                            <input type="text" class="form-control" pattern="\d+((\(|)|-)\d+)?" inputmode="numeric" onkeyup="k(this);" name="discount" value="" placeholder="0.00">
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="row ">
+                                    <div class="col-xl-4 col-sm-4 ">
+                                        <button type="submit" id="send" class="form-control btn btn-success ">Criar
+                                        Produto</button>
+                                    </div>
+                                </div>
+
+
+
+                            </form>
+
+                        </div>
+                        <!-- end card-body -->
+                    </div>
+                    <!-- end card-->
+                </div>
+                <!-- end col -->
+            </div>
+            <!-- end row -->
+
+
+
+
+        </div>
+        <!-- container-fluid -->
+
+    </div>
+    <style>
+        .dropzone {
+            zoom: 0.8;
+        }
+    </style>
+
+
+    <div class="complete-select2">
+        <span class="finalizar form-control btn btn-secondary ">Concluir</span>
+    </div>
+
+
+
+    <%-include('../partial/footer')%>

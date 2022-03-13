@@ -1,0 +1,123 @@
+<%-include('../partial/header')%>
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+            <div class="row page-title">
+                <div class="col-md-12">
+
+                    <h4 class="mb-1 mt-0">Novo Vendedor</h4>
+
+                </div>
+            </div>
+
+
+
+
+            <div class="row">
+                <div class="col-12 col-xl-8">
+                    <div class="card">
+                        <div class="card-body">
+
+
+
+                            <form id="product" method="post" action="/loja/sellers" class="needs-validation form-horizontal" novalidate>
+
+
+                                <div class="row">
+
+
+                                    <div class="col-xl-6 col-sm-4">
+                                        <div class="form-group">
+                                            <label for="simpleinput">Nome do Vendedor</label>
+                                            <input type="text" class="form-control" id="simpleinput" name="name" value="" placeholder="Nome do Vendedor" required>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-6 col-sm-4">
+                                        <div class="form-group">
+                                            <label for="simpleinput">Whatsapp</label>
+                                            <input type="text" class="form-control" id="simpleinput" inputmode="numeric" onkeyup="p(this);" name="phone" value="" placeholder="(31) 98888-8888" required>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row ">
+                                    <div class="col-xl-6 col-sm-6 ">
+                                        <button type="submit" class="form-control btn btn-success ">Criar</button>
+                                    </div>
+                                </div>
+
+
+
+                            </form>
+
+                        </div>
+                        <!-- end card-body -->
+                    </div>
+                    <!-- end card-->
+
+
+                </div>
+                <!-- end col -->
+            </div>
+            <!-- end row -->
+            <div class="row">
+                <%if(sellers.length >0){%>
+
+                    <% sellers.forEach((seller, index) => { %>
+                        <div class="col-xl-4 col-lg-6" id="<%=seller.url%>">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="badge badge-danger float-right deleteSeller" onclick="deleteseller('<%=seller.url%>')">APAGAR
+                                    </div>
+                                    <p class="text-success text-uppercase font-size-12 mb-2">VENDEDOR</p>
+                                    <h5>
+                                        <a href="#" class="text-dark">
+                                            <%=seller.name%>
+                                                <%=seller.phone%>
+                                                    <p class="text-muted mb-2 url">
+                                                        <%=`https://anyloja.com.br/${store.cod}/${seller.url}`%>
+                                                    </p>
+                                        </a>
+                                    </h5>
+                                    <button type="submit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Copiado!" class="form-control btn btn-secondary" onclick="copyToClipboard('<%=`https://anyloja.com.br/${store.cod}/${seller.url}`%>')" id="copyButton">Copiar link do
+                            Vendedor</button>
+
+                                </div>
+
+                            </div>
+                            <!-- end card -->
+                        </div>
+
+                        <% }) %>
+                            <%}else{%>
+                                <div class="col-xl-6 col-lg-6">
+                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                        Cadastre um vendedor para enviar o link da sua loja e começar a receber pedidos.
+                                        <button id="copyTarget" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                                    </div>
+                                </div>
+                                <%}%>
+            </div>
+
+
+
+        </div>
+        <!-- container-fluid -->
+
+    </div>
+    <style>
+        .dropzone {
+            zoom: 0.8;
+        }
+    </style>
+
+
+
+
+    <%-include('../partial/footer')%>
