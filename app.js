@@ -11,7 +11,6 @@ const flash = require('connect-flash');
 var FileStore = require('session-file-store')(session);
 var fileStoreOptions = {};
 
-
 const app = express();
 const port = process.env.PORT || 3000;
 
