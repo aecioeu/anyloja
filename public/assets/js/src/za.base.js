@@ -985,7 +985,7 @@ async function InitWhatsapp(resp) {
     })
     order += `${nl}*Total: R$${orderTotal.toFixed(2)}*${nl}`
     order += `Pedido Realizado em ${hoje} as ${hora}hrs${nl}`
-    order += `Acesse seu pedido nesse link: https://anyloja.com.br/order/${resp.order_url}${nl}`
+    //order += `Acesse seu pedido nesse link: https://anyloja.com.br/order/${resp.order_url}${nl}`
     order += `👉Apenas Envie para o Vendedor`
     // perguntar na pagina se foi redirecionado corretamente para o whatsapp
     // enviar o cliente para o whatsapp em uma nova pagina
@@ -1086,7 +1086,7 @@ $('.send-client').click('click', function(e) {
 function whatsappToDB(){
  
        // var url = $('.whatsapp').attr('data')
-        var redirectWindow = window.open('https://google.com', '_blank')
+        var redirectWindow = 
 
         $.ajax({
             url: `/${data.store.cod}/send/whatsapp`,
@@ -1099,8 +1099,9 @@ function whatsappToDB(){
          // start do send order to watsapp
          
                 InitWhatsapp(response).then(link => {
-                    //
-                    redirectWindow.location.href = link
+           
+                  
+                    window.open(link, '_blank')
                     console.log(link)
                 })
 

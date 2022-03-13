@@ -2861,7 +2861,7 @@ console.log(pieces.indexOf('rook'));
                 // inserindo novo pedido
                 var data = {
                     name: (products.customer.name) ? products.customer.name : '',
-                    whatsapp: (products.customer.whatsapp) ? products.customer.whatsapp : '',
+                    phone: (products.customer.whatsapp) ? products.customer.whatsapp : '',
                     seller_id: url,
                     seller_name: seller[0].name,
                     store_id: store[0].id,
@@ -2871,6 +2871,7 @@ console.log(pieces.indexOf('rook'));
 
                 await pool.query('INSERT INTO orders SET ?', data, async function (err, result) {
                     var order_id = result.insertId
+                    console.log(result)
                     // Inserindo os produtos vendidos
                     //console.log("inserido a order")
 
