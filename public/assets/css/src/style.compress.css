@@ -1,7 +1,7 @@
 body,
 html,
 p {
-    color: #747794
+    color: rgb(128, 128, 128);
 }
 
 *,
@@ -32,7 +32,8 @@ body::-webkit-scrollbar-thumb {
 
 body,
 html {
-    font-family: "Google Sans", sans-serif;
+   font-family: "Roboto", sans-serif;
+    /*font-family: "Google Sans", sans-serif;*/
     overflow-x: hidden
 }
 
@@ -187,8 +188,8 @@ input:required {
 }
 
 .btn-success {
-    background-color: #25d366;
-    border-color: #25d366
+    background-color: #3bb78f;
+    background-image: linear-gradient(315deg, #3bb78f 0%, #0bab64 74%);
 }
 
 .btn-success:focus,
@@ -203,7 +204,7 @@ input:required {
     font-size: .75em;
     color: #fff;
     vertical-align: baseline;
-    border-radius: 24px;
+    border-radius: 5px;
 }
 
 .badge,
@@ -216,7 +217,10 @@ input:required {
 }
 
 .badge-danger {
-    background-color: #ea4c62 !important
+
+    background-color: #a40606;
+background-image: linear-gradient(315deg, #a40606 0%, #d98324 74%);
+
 }
 
 .badge-warning {
@@ -229,7 +233,8 @@ input:required {
 }
 
 .badge-success {
-    background-color: #00b894 !important
+    background-color: #3bb78f;
+    background-image: linear-gradient(315deg, #3bb78f 0%, #0bab64 74%);
 }
 
 .section-heading {
@@ -246,7 +251,7 @@ input:required {
 .section-heading h6 {
     margin-bottom: 0;
     color: #020310;
-    font-size: 17px
+    font-size: 20px
 }
 
 .section-heading p {
@@ -550,7 +555,7 @@ strong {
     min-width: 22px;
     width: 22px;
     height: 2px;
-    background-color: #747794;
+    background-color: rgb(128, 128, 128);;
     margin-bottom: 4px
 }
 
@@ -581,7 +586,7 @@ strong {
 }
 
 .back-button a {
-    color: #747794;
+    color: rgb(128, 128, 128);;
     font-weight: 500;
     font-size: 14px;
     display: -webkit-box;
@@ -778,23 +783,16 @@ strong {
     font-weight: 500;
     display: block;
     line-height: 1.2;
-    margin-bottom: .25rem;
+   
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap
 }
 
-.flash-sale-card .sale-price {
-    font-size: 14px;
-    font-weight: 700;
-    color: #000;
-    margin-bottom: 0
-}
 
 .flash-sale-card .real-price {
-    display: inline-block;
-    margin-left: 5px;
-    font-size: 12px;
+    color: rgb(128, 128, 128);
+    font-size: 14px;
     text-decoration: line-through;
     margin-bottom: .25rem
 }
@@ -813,23 +811,26 @@ strong {
 }
 
 .top-product-card .product-title {
-    font-size: 14px;
-    font-weight: 700;
-    margin-bottom: .25rem;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: normal;
     color: #020310
 }
 
 .top-product-card .sale-price {
+    font-weight: 500;
     margin-bottom: .25rem;
-    color: #ea4c62;
-    font-weight: 700
+    color: rgb(64, 64, 64);
+    font-size: 18px;
+    line-height: 20px;
+   
 }
 
 .top-product-card .sale-price span {
-    color: #747794;
-    margin-left: 5px;
+    color: rgb(128, 128, 128);;
     text-decoration: line-through;
-    font-size: 11px
+    font-size: 14px;
+    font-weight: 400;
 }
 
 .top-product-card .product-rating {
@@ -937,7 +938,7 @@ strong {
 .notification-area .list-group-item span {
     font-size: 12px;
     display: block;
-    color: #747794
+    color: rgb(128, 128, 128);
 }
 
 .notification-area .list-group-item:first-child {
@@ -1216,7 +1217,7 @@ strong {
 
 .cart-table table a span {
     display: block;
-    color: #747794
+    color: rgb(128, 128, 128);
 }
 
 .cart-table table a:focus,
@@ -1258,19 +1259,19 @@ strong {
 
 .product-description .sale-price {
     font-size: 20px;
-    font-weight: 700;
+    /*font-weight: 700;*/
     margin-bottom: .5rem;
-    color: #ea4c62
+    color: rgb(64, 64, 64);
 }
 
 .product-description .sale-price span {
     margin-left: .5rem;
-    color: #747794;
+    color: rgb(128, 128, 128);;
     font-size: 1rem
 }
 
 .pd {
-    color: #747794;
+    color: rgb(128, 128, 128);;
     font-size: 1rem
 }
 
@@ -1289,7 +1290,7 @@ strong {
 
 .product-description .ratings span {
     font-size: 12px;
-    color: #747794
+    color: rgb(128, 128, 128);
 }
 
 .product-description .total-result-of-ratings span:first-child {
@@ -1398,7 +1399,7 @@ strong {
     font-weight: 700;
     text-transform: capitalize;
     line-height: 1;
-    color: #747794;
+    color: rgb(128, 128, 128);;
     z-index: 1
 }
 
@@ -1654,17 +1655,12 @@ span.cart-qnt {
     }
 }
 
-.top-product-card .badge {
-    position: relative;
-    top: 1rem;
-    left: 1rem;
-    z-index: 10
-}
+
 
 .d-destaque,
 .off {
-    font-size: 15px !important;
-    left: -5px !important
+   /* font-size: 15px !important;*/
+   margin-bottom: 5px;
 }
 
 .p-edit {
@@ -1739,7 +1735,7 @@ hr {
 
 .sub {
     font-size: 11px;
-    color: #747794;
+    color: rgb(128, 128, 128);;
     text-transform: uppercase;
     line-height: 33px
 }
@@ -1769,9 +1765,9 @@ hr {
 
 .rs,
 rs {
-    font-size: 9px;
+   /* font-size: 9px;
     position: relative;
-    top: -5px;
+    top: -5px;*/
     font-weight: 400
 }
 
@@ -1884,7 +1880,8 @@ rs {
     flex: 0 0 24px;
     width: 24px;
     max-width: 24px;
-    background-color: #ffaf00
+    background-color: #f5d020;
+    background-image: linear-gradient(315deg, #f5d020 0%, #f53803 74%);
 }
 
 .arrow {
@@ -1904,11 +1901,13 @@ rs {
 }
 
 .left-slide {
+    top: -5px;
     left: -10px;
 }
 
 .right-slide {
-    left: 10px;
+    top: -5px;
+    left: 0px;
     transform: rotate(180deg);
 }
 

@@ -17,10 +17,17 @@ exports.compressImage = async(file, folder) => {
     await mkdirp(`${dir}/big`);
 
     await sharp(file.path)
-        .flatten({ background: { r: 255, g: 255, b: 255 } })
         .rotate()
         .resize({
-            width: 300
+            width: 300,
+            height : 300,
+            fit: 'contain',
+            position: 'centre',
+            background: {
+                r: 255,
+                g: 255,
+                b: 255,
+            }
         })
         .toFormat('webp')
         .toFile(`${dir}/${filename}`)
@@ -30,7 +37,15 @@ exports.compressImage = async(file, folder) => {
         .toFormat('webp')
         .rotate()
         .resize({
-            width: 1280
+            width: 1280,
+            height : 1280,
+            fit: 'contain',
+            position: 'centre',
+            background: {
+                r: 255,
+                g: 255,
+                b: 255,
+            }
         })
         .toFile(`${dir}/big/${filename}`)
 

@@ -1,4 +1,4 @@
-<%-include('partials/header', {back : 'true', header: product.name, title: 'Detalhes do Produto ' + product.name , description: 'Veja todos os detalhes do produto ' + product.name})-%>
+<%-include('partials/header', {back : 'true', header: "Detalhes do Produto", title: 'Detalhes do Produto ' + product.name , description: 'Veja todos os detalhes do produto ' + product.name})-%>
 
 
     <div class="page-content-wrapper">
@@ -99,6 +99,13 @@
 
                 <div class="container" style="padding: 0;">
                     <div class="row">
+
+<div  style="margin: 15px 15px 20px 15px;width: fit-content;color: rgb(64, 64, 64);">
+
+   <h2><%- product.name %></h2> 
+
+</div>
+
                         <div class="col-sm-12 col-md-6">
                             <span class="zoom-buttom"><i class="las la-search-plus"></i></span>
 
@@ -132,7 +139,7 @@
 
 
                                         </div>
-                                        <%-(product.discount > 0) ? ` <span class="badge badge-danger off wow slideInRight" data-wow-duration="200" data-wow-delay="0" style="font-size: 27px !important; height: fit-content; ">${Math.round((product.discount/product.price) * 100)}% OFF<small class="economia">Economize <rs>R$</rs>${Math.round((product.discount) * 100)/100}</small></span>` : ''%>
+                                        <%-(product.discount > 0) ? ` <span class="badge badge-danger off wow slideInRight" data-wow-duration="200" data-wow-delay="0" style="font-size: 27px !important; height: fit-content; ">${Math.round((product.discount/product.price) * 100)}% OFF<small class="economia">Economize <span style="font-weight:400">${Math.round((product.discount) * 100)/100}</span></small></span>` : ''%>
 
 
 
@@ -252,7 +259,7 @@
 
                     <div class="container">
                         <hr>
-                        <p class="mb-1 mt-3 font-weight-bold" style="text-transform: uppercase;color: #000;">Você tambem pode gostar 👇</p>
+                        <p class="mb-1 mt-3 font-weight-bold" style="text-transform: uppercase;color: #000;">Você tambem pode gostar ...</p>
                         <div class="row g-3">
 
                             <% productsSuggest.forEach((product, index) => { %>

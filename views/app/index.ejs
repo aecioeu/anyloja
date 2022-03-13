@@ -2,21 +2,7 @@
 
     <%- include('partials/menu') -%>
         <style>
-            .flash-sale-card .sale-price {
-                font-size: 14px;
-                font-weight: 700;
-                color: #ea4c62;
-                margin-bottom: 0;
-            }
-            
-            .flash-sale-card .real-price {
-                display: inline-block;
-                margin-left: 5px;
-                font-size: 12px;
-                text-decoration: line-through;
-                margin-bottom: .25rem;
-                color: #747794;
-            }
+      
             
             @media only screen and (min-device-width: 320px) and (max-device-width: 773px) {
                 .lens-mobile {
@@ -139,9 +125,11 @@
                                 src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
                                 data-src="<%-`${((product.media.length > 0) ? `/media/${store.folder}/${product.media[0].name}` : '/media/no-pic.jpg')}`%>"
                                 alt><span class="product-title"><%-product.name%></span>
+                                <span
+                                    class="real-price">R$<%-`${parseFloat(product.price)}`%></span>
                             <p class="sale-price">
-                                <rs>R$</rs><%-`${parseFloat(product.price-product.discount).toFixed(2)}`%><span
-                                    class="real-price"><%-`${parseFloat(product.price)}`%></span>
+ 
+                                R$<%-`${parseFloat(product.price-product.discount).toFixed(2)}`%>
                             </p>
                         </a></div>
                                                             </div>
@@ -212,7 +200,7 @@
                                         <%-`${product.name}`%>
                                     </span>
 
-                                                                                <%-`${((product.discount>0) ? ` <p class="sale-price"><rs>R$</rs>${(product.price-product.discount).toFixed(2)}<span>${product.price}</span></p>` : `<p class="sale-price"><rs>R$</rs>${product.price}</p>` )}`%>
+                                                                                <%-`${((product.discount>0) ? ` <p class="sale-price">R$${(product.price-product.discount).toFixed(2)}<span>${product.price}</span></p>` : `<p class="sale-price">R$${product.price}</p>` )}`%>
 
                                                                         </a>
                                                                     </div>
@@ -247,16 +235,19 @@
                                                                 <div class="card top-product-card">
                                                                     <div class="card-body">
                                                                         <a href="<%-`/${store.cod}/product/${product.product_id}`%>">
-                                                                            <%-(product.discount > 0) ? ` <span class="badge badge-danger off"">${Math.round((product.discount/product.price) * 100)}% OFF</span>` : ''%>
-
+                                                                         
                                                                                 <!--<span class="badge badge-warning custom-badge"><i class="lni lni-star"></i></span>-->
                                                                                 <img class="lazy" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="<%-`${((product.media.length > 0) ? `/media/${store.folder}/${product.media[0].name}` : '/media/no-pic.jpg')}`%>" alt>
 
 
+                                                                                <%-(product.discount > 0) ? ` <span class="badge badge-danger off"">${Math.round((product.discount/product.price) * 100)}% OFF</span>` : ''%>
+
                                                                                 <span class="product-title d-block">
+                                                                                    
                                     <%-`${product.name}`%>
                                 </span>
-                                                                                <%-`${((product.discount>0) ? ` <p class="sale-price"><rs>R$</rs>${(product.price-product.discount).toFixed(2)}<span>${product.price}</span></p>` : `<p class="sale-price">${product.price}</p>` )}`%>
+                                
+                                                                                <%-`${((product.discount>0) ? ` <p class="sale-price"><span>R$${product.price}</span><br>R$${(product.price-product.discount).toFixed(2)}</p>` : `<p class="sale-price">R$${product.price}</p>` )}`%>
 
 
                                                                         </a>

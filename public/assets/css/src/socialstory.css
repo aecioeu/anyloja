@@ -292,4 +292,5 @@
     color: rgba(0,0,0,.87);
     box-shadow: 0 2px 5px 1px rgb(64 60 67 / 16%);
     position: fixed; bottom: 10px;padding: 10px 20px; max-width: 90%;left: 50%; transform: translate(-50%, -50%);background: #fff;border-radius: 24px;
+    text-align: center;
 }

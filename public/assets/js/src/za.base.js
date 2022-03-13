@@ -833,7 +833,7 @@ if (data.products) {
                     <div class="card flash-sale-card">
             <div class="card-body"><a href="/${data.store.cod}/product/${product.product_id}"><img src="${imgPreload}" data-src="${((product.media.length > 0) ? `/media/${data.store.folder}/${product.media[0].name}` : '/media/no-pic.jpg')}" alt><span
                   class="product-title">${product.name}</span>
-                <p class="sale-price"><span class="rs">R$</span>${parseFloat(product.price - product.discount)}<span class="real-price">${parseFloat(product.price)}</span></p>
+                <p class="sale-price"><span class="real-price">R$${parseFloat(product.price)}</span><br><span class="rs">R$</span>${parseFloat(product.price - product.discount)}</p>
               </a></div>
           </div>`
             cnt_products_discount++
@@ -845,7 +845,7 @@ if (data.products) {
             <div class="card top-product-card">
                 <div class="card-body"><span class="badge badge-success">Destaque</span>
                     <a class="product-thumbnail d-block" href="/${data.store.cod}/product/${product.product_id}"><img class="mb-2" src="${imgPreload}" data-src="${((product.media.length > 0) ? `/media/${data.store.folder}/${product.media[0].name}` : '/media/no-pic.jpg')}" alt></a><a class="product-title d-block" href="single-product.html">${product.name}</a>
-                    ${((product.discount > 0) ? `<p class="sale-price">${product.price - product.discount}<span>${product.price}</span></p>` : `<p class="sale-price">${product.price}</p>`)}
+                    ${((product.discount > 0) ? `<p class="sale-price">R$${product.price - product.discount}<span>${product.price}</span></p>` : `<p class="sale-price">R$${product.price}</p>`)}
                     <div class="product-rating"><i class="lni lni-staaddCartr-filled"></i><i class="lni lni-star-filled"></i><i class="lni lni-star-filled"></i><i class="lni lni-star-filled"></i><i class="lni lni-star-filled"></i></div>
                 </div>
             </div>
