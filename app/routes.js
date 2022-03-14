@@ -3036,13 +3036,13 @@ console.log(pieces.indexOf('rook'));
 
 
 
-                var query = `SELECT products.store_id, products.tags, products.id, products.name, products.categorie_id, products.product_id, products.price, products.discount, products.active, products.featured , (products.price-IFNULL(products.discount,0)) as finalprice,(IFNULL(products.discount,1)/products.price*100) as discount_price FROM products WHERE products.store_id = ? ${searchTPL} ORDER BY RAND()`
+                var query = `SELECT products.store_id, products.tags, products.id, products.name, products.categorie_id, products.product_id, products.price, products.discount, products.active, products.featured , (products.price-IFNULL(products.discount,0)) as finalprice,(IFNULL(products.discount,1)/products.price*100) as discount_price FROM products WHERE products.store_id = '${store[0].id}' ${searchTPL} ORDER BY RAND() LIMIT 10`
 
 
+                
 
-
-                const productsSuggest = await pool.query(`${query}`, store[0].id)
-
+                const productsSuggest = await pool.query(`${query}`)
+           
 
 
                 ////////////////////////////////////////////////////////////////////////
@@ -3050,62 +3050,31 @@ console.log(pieces.indexOf('rook'));
                 var totalResults = 0
 
                 var productsSuggest_array = []
+
                 await asyncForEach(productsSuggest, async (product) => {
-
-                    var search_tags3 = []
-
-                    var product_variations = product.tags
-                    var productTags = product_variations.split(',');
-
-                    //pego os tagtitle disponiveis
-                    const tags_title = await pool.query("SELECT tags_title.name As title, tags_title.id, tags_title.required FROM tags INNER JOIN tags_title ON tags_title.id = tags.tags_title WHERE tags_title.store_id = ? AND tags.id IN (?) AND tags_title.required = 1 AND tags_title.active ='1' GROUP BY  tags_title.name, tags_title.id ORDER BY tags_title.order ASC LIMIT 0,10", [store[0].id, productTags])
-
-                    await asyncForEach(tags_title, async (tag_title) => {
-                        var mountTags = []
-                        //console.log(tag_title.title, tag_title.id)
-                        const tags = await pool.query("SELECT * FROM tags WHERE store_id = ? AND tags_title= ? AND active ='1'  ORDER BY CAST(tags.name AS UNSIGNED)", [store[0].id, tag_title.id])
-                        //console.log(tags)
-                        await asyncForEach(tags, async (tag) => {
-                            productTags.find(el => {
-                                if (el == tag.id)
-                                    mountTags.push({
-                                        "name": tag.name,
-                                        "id": tag.id
-                                    })
-                            })
-
-
-                        })
-
-                        search_tags3.push({
-                            "title": tag_title.title,
-                            "tags": mountTags
-                        })
-
-
-                        //console.log(['joe', 'jane', 'mary'].includes('jane')); //true
-                        const images = await pool.query("SELECT name FROM media WHERE product_id = ? ORDER BY media.order ASC LIMIT 0,1", [product.product_id])
-                        var arrayProd = {
-                            "product_id": product.product_id,
-                            "name": product.name,
-                            "price": product.price,
-                            "discount": product.discount,
-                            "active": product.active,
-                            "featured": product.featured,
-                            "media": images,
-                            "categories": product.categorie_id,
-                            "tags": product.tags,
-                            "off": product.discount_price,
-                            "product_required_tag": search_tags3
-                        }
-                        totalResults++
-                        productsSuggest_array.push(arrayProd)
-
-                    })
+                 
+                    const images = await pool.query("SELECT name FROM media WHERE product_id = ? ORDER BY media.order ASC LIMIT 0,1", [product.product_id])
+                    var arrayProd = {
+                        "product_id": product.product_id,
+                        "name": product.name,
+                        "price": product.price,
+                        "discount": product.discount,
+                        "active": product.active,
+                        "featured": product.featured,
+                        "media": images,
+                        "categories": product.categorie_id,
+                        "tags": product.tags,
+                        "off": product.discount_price,
+                        "product_required_tag": ''
+                    }
+                    totalResults++
+                    productsSuggest_array.push(arrayProd)
 
 
 
                 })
+
+                console.log(productsSuggest_array)
 
 
 

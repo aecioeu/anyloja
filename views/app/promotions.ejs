@@ -1,5 +1,9 @@
 <%-include('partials/header', {back : 'true', header:"Promoções da Loja", title: 'Promoções da Loja' , description: 'Confira seu nossas Promoções.'})-%>
     <%- include('partials/menu_product') -%>
+    <style>.lens-mobile{
+        display: none !important;   
+           
+       }</style>
 
         <div class="page-content-wrapper">
             <!-- Top Products-->
@@ -23,15 +27,16 @@
                                     <div class="col-6 col-md-4 col-lg-3">
                                         <div class="card top-product-card">
                                             <div class="card-body">
-                                                <%-((product.featured == 1) ? `<span class="badge badge-success">Destaque</span>`:``)  %>
-                                                    <a class="product-thumbnail d-block" href="/<%=store.cod%>/product/<%=product.product_id%>"><img class="mb-2"
+                                                      <a class="product-thumbnail d-block" href="/<%=store.cod%>/product/<%=product.product_id%>"><img class="mb-2 lazy"
                                     src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
                                     data-src="<%= ((product.media.length > 0) ? `/media/${store.folder}/${product.media[0].name}` : '/media/no-pic.jpg')%>"
                                     alt></a>
                                                     <a class="product-title d-block" href="/<%=store.cod%>/product/<%=product.product_id%>">
                                                         <%=product.name%>
                                                     </a>
-                                                    <%-((product.discount > 0) ? `<p class="sale-price">Por: <rs>R$</rs>${(product.price-product.discount)}<span><rs>R$</rs>${product.price}</span></p>` : `<p class="sale-price">${product.price}</p>` )%>
+                                                    <%-((product.featured == 1) ? `<span class="badge badge-success">Destaque</span>`:``)  %>
+                                            
+                                                    <%-((product.discount > 0) ? `<p class="sale-price"><span>R$${product.price}</span><br>R$${(product.price-product.discount).toFixed(2)}</p>` : `<p class="sale-price">${product.price}</p>` )%>
                                                         <div class="product-rating"><i class="lni lni-star-filled"></i><i class="lni lni-star-filled"></i><i class="lni lni-star-filled"></i><i class="lni lni-star-filled"></i><i class="lni lni-star-filled"></i></div>
 
                                             </div>

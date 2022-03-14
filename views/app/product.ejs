@@ -129,7 +129,7 @@
                                         <div class="p-title-price">
 
                                             <%if(store.installment > 0){%>
-                                                <%-((product.discount > 0) ? `<span class="pd">Custava <span><rs>R$</rs>${product.price}</span></span><small class="small-product-info" style="font-size: 15px;line-height: 16px;font-weight: 700;color: rgb(0 0 0 / 80%);">Agora por: <rs>R$</rs>${(product.price-product.discount).toFixed(2)}</small><p class="sale-price mb-0">${store.installment}x <rs>R$</rs>${((product.price-product.discount)/store.installment).toFixed(2)} s/ juros</p>` : `<rs>R$</rs>${product.price}<small> em até</small><p class="sale-price mb-0">${store.installment} x <rs>R$</rs>${((product.price/store.installment)).toFixed(2)} s/ juros</p>` )%>
+                                                <%-((product.discount > 0) ? `<span class="pd">Custava <span><rs>R$</rs>${product.price}</span></span><small class="small-product-info" style="font-size: 18px;line-height: 16px;font-weight: 500;color: rgb(0 0 0 / 80%);">Agora por: R$${(product.price-product.discount).toFixed(2)}</small><p class="sale-price mb-0">${store.installment}x <rs>R$</rs>${((product.price-product.discount)/store.installment).toFixed(2)} s/juros</p>` : `<rs>R$</rs>${product.price}<small> em até</small><p class="sale-price mb-0">${store.installment} x <rs>R$</rs>${((product.price/store.installment)).toFixed(2)} s/juros</p>` )%>
 
                                                     <%}else{%>
 
@@ -269,15 +269,15 @@
                                     <div class="card top-product-card">
                                         <div class="card-body">
                                             <a href="<%-`/${store.cod}/product/${product.product_id}`%>">
-                                                <%-(product.discount > 0) ? ` <span class="badge badge-danger off">${Math.round((product.discount/product.price) * 100)}% OFF</span>` : ''%>
-
+                                              
                                                     <img class="mb-2 lazy" style="max-width: 100% !important;" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="<%-`${((product.media.length > 0) ? `/media/${store.folder}/${product.media[0].name}` : '/media/no-pic.jpg')}`%>"
                                                         alt>
                                                     <span class="product-title d-block">
                             <%-`${product.name}`%>
                         </span>
+                        <%-(product.discount > 0) ? ` <span class="badge badge-danger off">${Math.round((product.discount/product.price) * 100)}% OFF</span>` : ''%>
 
-                                                    <%-`${((product.discount>0) ? ` <p class="sale-price"><rs>R$</rs>${(product.price-product.discount).toFixed(2)}<span>${product.price}</span></p>` : `<p class="sale-price"><rs>R$</rs>${product.price}</p>` )}`%>
+                                                    <%-`${((product.discount>0) ? ` <p class="sale-price"><span>R$${product.price}</span><br>R$${(product.price-product.discount).toFixed(2)}</p>` : `<p class="sale-price"><rs>R$</rs>${product.price}</p>` )}`%>
 
                                             </a>
 

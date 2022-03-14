@@ -154,8 +154,8 @@ input:required {
 
 .btn-warning {
     color: #fff;
-    background-color: #ffaf00;
-    border-color: #ffaf00
+    background-color: #f39f86;
+    background-image: linear-gradient(315deg, #f39f86 0%, #f9d976 74%);
 }
 
 .btn-warning:focus,
@@ -1272,7 +1272,7 @@ strong {
 
 .pd {
     color: rgb(128, 128, 128);;
-    font-size: 1rem
+    font-size: 14px
 }
 
 .economia {
@@ -1548,7 +1548,8 @@ strong {
 }
 
 .card-body img {
-    border-radius: 5px
+    border-radius: 5px;
+    padding-bottom: 10px;
 }
 
 .need-select {
@@ -1867,9 +1868,9 @@ rs {
     -webkit-box-flex: 0;
     -ms-flex: 0 0 12px;
     flex: 0 0 12px;
-    width: 12px;
-    max-width: 12px;
-    height: 2px;
+    max-width: 9px;
+    border-radius: 50em;
+    height: 9px;
     background-color: #ebebeb;
     margin: 0 5px
 }
@@ -2171,7 +2172,7 @@ rs {
 
 .btn-g {
     text-align: center;
-    width: 14%;
+    width: 50px;
     padding: 5px;
     margin-left: 3px;
     margin-right: 16px;
