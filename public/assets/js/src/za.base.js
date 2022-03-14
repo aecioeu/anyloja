@@ -1086,7 +1086,7 @@ $('.send-client').click('click', function(e) {
 function whatsappToDB(){
  
        // var url = $('.whatsapp').attr('data')
-        var redirectWindow = 
+       // var redirectWindow = 
 
         $.ajax({
             url: `/${data.store.cod}/send/whatsapp`,
