@@ -911,7 +911,7 @@ function getNotificationData(token, storeName, price, cod, folder, order_cod) {
 
 function sendMessage(cod, price, folder, order_cod) {
 
-    $.ajax({
+  /*  $.ajax({
         url: "/loja/notify",
         type: "POST",
         data: {
@@ -949,7 +949,7 @@ function sendMessage(cod, price, folder, order_cod) {
             alert("error");
         }
 
-    });
+    });*/
 
 
 }

@@ -1595,7 +1595,7 @@ console.log(pieces.indexOf('rook'));
         })
     });
 
-    app.post('/loja/notify', async function (req, res) {
+   /* app.post('/loja/notify', async function (req, res) {
         // render the page and pass in any flash data if it exists
         var cod = req.body.cod
         //var count = req.body.count
@@ -1619,7 +1619,7 @@ console.log(pieces.indexOf('rook'));
         }
 
    res.json( tokens)
-    });
+    });*/
 
 
     app.post('/loja/BannersMedia', isLoggedIn, async function (req, res) {
@@ -3074,7 +3074,7 @@ console.log(pieces.indexOf('rook'));
 
                 })
 
-                console.log(productsSuggest_array)
+                //console.log(productsSuggest_array)
 
 
 
