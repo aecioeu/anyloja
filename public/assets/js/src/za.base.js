@@ -1087,6 +1087,7 @@ function whatsappToDB(){
  
        // var url = $('.whatsapp').attr('data')
        // var redirectWindow = 
+       var redirectWindow = window.open('https://google.com', '_blank')
 
         $.ajax({
             url: `/${data.store.cod}/send/whatsapp`,
@@ -1101,8 +1102,9 @@ function whatsappToDB(){
                 InitWhatsapp(response).then(link => {
            
                   
-                    window.open(link, '_blank')
+                    redirectWindow.location.href = link
                     console.log(link)
+                    
                 })
 
             },
