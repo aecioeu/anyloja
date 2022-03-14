@@ -171,7 +171,7 @@ module.exports = function(app, passport) {
 
         function makeid(length) {
             var result = '';
-            var characters = 'ABCDEFGHIJKLMNOPQRSTUVXZabcdefghijklmnopqrstuvxz0123456789';
+            var characters = 'ABCDEFGHIJKLMNOPQRSTUVXZ0123456789';
             var charactersLength = characters.length;
             for (var i = 0; i < length; i++) {
                 result += characters.charAt(Math.floor(Math.random() * charactersLength));
@@ -2856,7 +2856,7 @@ console.log(pieces.indexOf('rook'));
             if (seller[0]) {
                 //console.log('encontramos um vendedor')
 
-                const order_cod = seller[0].name.substring(0, 2) + '-' + makeid(3)
+                const order_cod = seller[0].name.substring(0, 3).toUpperCase() + '-' + makeid(3)
 
                 // inserindo novo pedido
                 var data = {
