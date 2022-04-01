@@ -306,6 +306,8 @@ module.exports = function(app, passport) {
 
             var images = await pool.query("SELECT name FROM media WHERE product_id = ? ORDER BY media.order ASC LIMIT 0,1", [product.product_id])
             var arrayProd = {
+
+                "cod" : product.cod,
                 "product_id": product.product_id,
                 "name": product.name,
                 "price": product.price,
@@ -1158,6 +1160,7 @@ console.log(pieces.indexOf('rook'));
         var active = req.body.active,
             featured = req.body.featured,
             name = req.body.name,
+            cod = req.body.cod,
             description = req.body.description,
             price = req.body.price,
             discount = req.body.discount,
@@ -1176,6 +1179,7 @@ console.log(pieces.indexOf('rook'));
             discount: (parseFloat(discount) ? parseFloat(discount) : 0),
             store_id: req.user.id,
             product_id: product_id,
+            cod : ((cod) ? cod : ''),
             // variations_data: variations_data,
             tags: ((tags) ? tags.toString() : ''),
 
@@ -1189,11 +1193,14 @@ console.log(pieces.indexOf('rook'));
     })
 
     app.post('/loja/edit/product', isLoggedIn, async function (req, res, next) {
-        //console.log(req.body)
+
+
+        console.log(req.body)
         //verificar se a categoria existe
         var active = req.body.active,
             featured = req.body.featured,
             name = req.body.name,
+            cod = req.body.cod,
             description = req.body.description,
             price = req.body.price,
             discount = req.body.discount,
@@ -1212,6 +1219,7 @@ console.log(pieces.indexOf('rook'));
             discount: (parseFloat(discount) ? parseFloat(discount) : 0),
             store_id: req.user.id,
             product_id: product_id,
+            cod : ((cod) ? cod : ''),
             // variations_data: variations_data,
             //tags: tags.toString(),
             tags: ((tags) ? tags.toString() : ''),
@@ -1905,10 +1913,8 @@ console.log(pieces.indexOf('rook'));
             
             const cod = req.params.cod
             const store = await pool.query("SELECT id,logo,store,cod, name, address, bio, phone, min_order, instagram, facebook, folder, pixel, show_categories_home, show_banner_sequential,show_search_at_home  FROM stores WHERE cod = ?", [cod])
-
-
-
-
+            const categories = await pool.query("SELECT name, category_id, icon FROM categories WHERE active ='1' AND store_id = ? ORDER BY categories.name ASC", [store[0].id])
+           
             if (store[0]) {
 
                 //if (req.signedCookies['seller']) {
@@ -2015,6 +2021,7 @@ console.log(pieces.indexOf('rook'));
                             search_tags: search_tags,
                             banners: banners,
                             admin: (req.user) ? true : false,
+                            categories : categories
                         });
 
                    // }
@@ -2357,6 +2364,7 @@ console.log(pieces.indexOf('rook'));
         const cod = req.params.cod
         const store = await pool.query("SELECT id,logo,store,cod, name, address, bio, phone, min_order, instagram, facebook, folder, pixel  FROM stores WHERE cod = ?", [cod])
 
+        
         //se o variations for vazia busca todas as variações
         var categories_search = ''
         //    if(searchTag.tags.length > 1){  
@@ -2902,12 +2910,15 @@ console.log(pieces.indexOf('rook'));
                                 description: DbProduct[0].description,
                                 variations: `${variation_tpl}`,
                                 qnt: produtc.qnt,
-                                order_id: order_id
+                                order_id: order_id,
+                                cod: ((DbProduct[0].cod) ? DbProduct[0].cod : '')
                             };
 
                             produtcs_DB.push(productsData)
 
                             totalOrder += parseFloat(DbProduct[0].price - DbProduct[0].discount) * produtc.qnt
+
+                            console.log(productsData)
 
                             await pool.query('INSERT INTO orders_products SET ?', productsData)
 
@@ -3089,6 +3100,7 @@ console.log(pieces.indexOf('rook'));
                     var arrayProd = {
                         "product_id": products[0].product_id,
                         "name": products[0].name,
+                        "codigo": products[0].cod,
                         "price": products[0].price,
                         "discount": products[0].discount,
                         "active": products[0].active,

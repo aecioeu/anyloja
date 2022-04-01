@@ -8,7 +8,7 @@
     <!-- Sidenav Profile-->
     <div class="sidenav-profile">
 
-        <div class="user-profile"><img src="<%=((store.logo) ? `/media/${store.folder}/logo/logo180.webp` : `/media/no-pic.jpg`)%>" alt></div>
+        <div class="user-profile"><img src="<%=((store.logo) ? `/media/${store.folder}/logo/logo180.webp?age=${store.logo.split('.')[0]}` : `/media/no-pic.jpg`)%>" alt></div>
 
         <div class="user-info">
             <h6 class="user-name mb-0">

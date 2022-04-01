@@ -2,7 +2,14 @@
 
     <%- include('partials/menu') -%>
         <style>
-      
+            .owl-carousel .owl-stage-outer {
+            position: relative;
+            overflow: hidden;
+            -webkit-transform: translate3d(0,0,0);
+            min-height: 49px !important;
+            }
+
+           
             
             @media only screen and (min-device-width: 320px) and (max-device-width: 773px) {
                 .lens-mobile {
@@ -14,13 +21,16 @@
 
         <div class="page-content-wrapper">
 
+         
+
+
             <!-- Product Catagories-->
 
             <div class="card user-info-card" style="padding-left: 20px;">
                 <div class="container">
                     <div class="card-body p-4 d-flex align-items-center mt-3" style="height: 130px;">
                         <div class="circle user-profile mr-3 stories-view" onclick="socialStory.launch();">
-                            <img src="<%=((store.logo) ? `/media/${store.folder}/logo/logo180.webp` : `/media/no-pic.jpg`)%>" alt="" />
+                            <img src="<%=((store.logo) ? `/media/${store.folder}/logo/logo180.webp?age=${store.logo.split('.')[0]}` : `/media/no-pic.jpg`)%>" alt="" />
                             <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="enable-background:new -580 439 577.9 194;" xml:space="preserve">
                         <circle cx="50" cy="50" r="48" />
                     </svg>
@@ -31,7 +41,7 @@
                         background: -moz-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
                         background: -webkit-linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
                         background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);">
-                            <img style="border: 2px #fff solid;" src="<%=((store.logo) ? `/media/${store.folder}/logo/logo180.webp` : `/media/no-pic.jpg`)%>" alt="">
+                            <img style="border: 2px #fff solid;" src="<%=((store.logo) ? `/media/${store.folder}/logo/.webp?age=${store.logo.split('.')[0]}` : `/media/no-pic.jpg`)%>" alt="">
 
                         </div>-->
                         <div class="user-info">
@@ -53,21 +63,10 @@
                         <strong>Stories</strong></p>
                 </div>
             </div>
-            <%if(store.show_categories_home == 1){%>
-                <div class="product-catagories-wrapper py-3 ">
-                    <div class="container ">
-                        <div class="section-heading ">
-                            <h6 class=" mt-3 ">Compre por Categoria</h6>
-                        </div>
-                        <div class="product-catagory-wrap text-center">
-                            <div class="row g-3 ">
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <%- include('partials/categories', {categories : categories, store: store, title : "Navegue pelas Categorias"}) -%>
 
-                <%}%>
+
 
                     <%if(banners.length >0){%>
                         <%if(store.show_banner_sequential == 0){%>
@@ -85,6 +84,7 @@
 
                                 <!-- Hero Slides-->
                                 <div class="container" style="padding:0px; <%-((store.show_categories_home == 0) ? 'margin-top: 15px;' : '')%>">
+
                                     <div class="hero-slides owl-carousel">
 
                                         <% banners.forEach((banner, index) => { %>
@@ -101,6 +101,8 @@
 
                                 <%}%>
                                     <%}%>
+
+                                    
 
 
                                         <div class="flash-sale-wrapper py-2 ">

@@ -101,12 +101,15 @@
 
                                                                         <div class="media-body">
                                                                             <div class="align-self-center float-right">
-                                                                                <rs>R$</rs>
+                                                                                R$
                                                                                 <%-(product.qnt*product.price)%>
                                                                             </div>
                                                                             <a href="/loja/product/<%-product.product_id%>">
                                                                                 <h6 class="mt-0 mb-0 font-size-15 font-weight-normal">
                                                                                     <span class="font-weight-bold">
+                                                                                        <%-((product.cod) ? `<span class="mt-1 badge badge-soft-secondary p-1 mb-1 font-size" style="
+                                                                                        zoom: 0.9;
+                                                                                    ">COD:${product.cod}</span><br>` : ``)%>
                                     <%-product.name%>
 
 
@@ -119,7 +122,7 @@
                                                                             </a>
                                                                             <p class="text-muted">
                                                                                 <%-product.qnt%> x
-                                                                                    <rs>R$</rs>
+                                                                                   R$
                                                                                     <%-product.price%>
                                                                             </p>
                                                                         </div>

@@ -785,7 +785,7 @@ async function addCart(itemID) {
 
 let cnt_products_discount = 0,
     cnt_products_featured = 0
-
+/*
 if (data.categories.length > 0) {
     var tpl_categories = ``
     var left_categories = ``
@@ -804,6 +804,7 @@ if (data.categories.length > 0) {
     })
     if (tpl_categories) {
         $('.product-catagory-wrap > div').append(tpl_categories)
+
     }
 
     if ($('.categories-display')) {
@@ -815,7 +816,32 @@ if (data.categories.length > 0) {
 
 
 
+}*/
+
+if (data.categories.length > 0) {
+    var tpl_categories = ``
+    var left_categories = ``
+    $.each(data.categories, function (i, category) {
+
+        left_categories += ` <li class="category"><a href="/${data.store.cod}/buscar?categories=${category.category_id}">
+    ${category.name}</i>
+    </a></li>`
+
+    })
+   
+
+    if ($('.categories-display')) {
+        $('.categories-display').append(left_categories)
+    }
+
+
+
+
+
+
 }
+
+
 
 if (data.products) {
 
@@ -1240,6 +1266,38 @@ $('.whatsapp').click(function () {
             });
         });
     }
+
+
+ // :: Flash Sale Slides
+ if ($.fn.owlCarousel) {
+    var flashSlide = $('.menu-slide');
+    flashSlide.owlCarousel({
+        items: 3,
+       
+        loop: true,
+      
+        autoplayTimeout: 5000,
+        responsiveClass:true,
+        autoHeight: false,
+        dots: false,
+        nav: false,
+        responsive: {
+            1400: {
+                items: 5,
+            },
+            992: {
+                items: 5,
+            },
+            768: {
+                items: 4,
+            },
+            480: {
+                items: 5,
+            },
+        },
+    })
+}
+
 
     // :: Flash Sale Slides
     if ($.fn.owlCarousel) {

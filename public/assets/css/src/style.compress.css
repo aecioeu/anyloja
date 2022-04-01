@@ -823,6 +823,7 @@ strong {
     color: rgb(64, 64, 64);
     font-size: 18px;
     line-height: 20px;
+    margin-top: 4px;
    
 }
 
@@ -1658,10 +1659,17 @@ span.cart-qnt {
 
 
 
-.d-destaque,
+.d-destaque {
+    /* font-size: 15px !important;*/
+    margin-bottom: 5px;
+    position: absolute;
+ 
+ }
 .off {
    /* font-size: 15px !important;*/
    margin-bottom: 5px;
+
+
 }
 
 .p-edit {
@@ -1799,7 +1807,8 @@ rs {
     margin: 1px;
     border-radius: 24px;
     box-shadow: 0 2px 5px 1px rgb(64 60 67 / 16%);
-    display: -webkit-inline-box;
+    display: block;
+    text-align: center;
 }
 
 .size {
@@ -2219,4 +2228,8 @@ a.logo-anyloja {
 .back-button {
     /* height: 24px; */
     width: 24px;
+}
+
+.menu-slide {
+    margin-bottom: 15px;
 }

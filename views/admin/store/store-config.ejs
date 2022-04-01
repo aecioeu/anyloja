@@ -21,7 +21,7 @@
                             <form id="product" method="post" action="/loja/store" class="needs-validation form-horizontal" enctype="multipart/form-data" novalidate>
                                 <div class="row">
                                     <div class="col-xl-12 col-sm-12 text-center mt-3">
-                                        <img id="blah" src="../<%=((store.logo) ? `media/${store.folder}/logo/logo180.webp` : `/media/no-pic.jpg`)%>" alt="" class=" rounded-circle" style="margin-left: 10px;border: 4px #f2f3f6 solid;width: 180px;height: 180px;">
+                                        <img id="blah" src="../<%=((store.logo) ? `media/${store.folder}/logo/logo180.webp?age=${store.logo.split('.')[0]}` : `/media/no-pic.jpg`)%>" alt="" class=" rounded-circle" style="margin-left: 10px;border: 4px #f2f3f6 solid;width: 180px;height: 180px;">
                                         <div class="form-group mt-sm-0">
                                             <label for="simpleinput">Sua Marca <small>(Sugestão 500px por
                                                 500px))</small></label>

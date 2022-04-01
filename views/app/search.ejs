@@ -7,7 +7,10 @@
 
 
     <%if(products.length >0){%>
+
+   
         <%- include('partials/menu_category') -%>
+        
 
             <%}else{%>
                 <%- include('partials/menu_product') -%>
@@ -73,13 +76,13 @@
 
                                                                  
 
-                                                                                        <%-((product.featured == 1) ? `<span class="badge badge-success d-destaque"><i class="las la-star"></i></span>`:``)  %>
+                                                                                        <%-((product.featured == 1) ? `<span class="badge badge-success d-destaque">Destaque</span>`:``)  %>
 
                                                                                             <a class="product-thumbnail d-block" href="/<%=store.cod%>/product/<%=product.product_id%>"><img
-                    class="mb-2 lazy"
-                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                    data-src="<%= ((product.media.length > 0) ? `/media/${store.folder}/${product.media[0].name}` : '/media/no-pic.jpg')%>"
-                    alt></a>
+                                                            class="mb-2 lazy"
+                                                            src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                                            data-src="<%= ((product.media.length > 0) ? `/media/${store.folder}/${product.media[0].name}` : '/media/no-pic.jpg')%>"
+                                                            alt></a>
                                                                                             <a class="product-title d-block" href="/<%=store.cod%>/product/<%=product.product_id%>">
                                                                                                 <%=product.name%>
                                                                                             </a>
