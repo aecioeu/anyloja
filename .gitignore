@@ -1,2 +1,4 @@
 critical.js
 package-lock.json
+/node_modules
+/sessions
