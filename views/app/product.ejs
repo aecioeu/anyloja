@@ -99,24 +99,29 @@
 
                 <div class="container" style="padding: 0;">
                     <div class="row">
-
-<div  style="margin: 15px 15px 20px 15px;width: -webkit-fill-available;color: rgb(64, 64, 64);">
-
-   <h2><%- product.name %><br><span class="badge" style="
-    font-size: 11px;
-    border: 1px solid grey;
-    color: grey;
-    float: right;
-">COD: <%=product.codigo%></span></h2> 
-   
-
-</div>
+                        
 
                         <div class="col-sm-12 col-md-6">
+
+
+                            <div  style="margin: 10px 15px 15px 15px;width: -webkit-fill-available;color: rgb(64, 64, 64);font-size: 16px;
+                            font-weight: 400;">
+                            <span class="cod-text">CÓDIGO | <%=product.codigo%> </span>
+
+                                <%- product.name %><br>
+                             
+                            </span>
+                                
+                             
+                             </div>
+
+
                             <span class="zoom-buttom"><i class="las la-search-plus"></i></span>
 
                             <!-- Product Slides-->
+                            <div class="slider-counter"></div>
                             <div class="product-slides owl-carousel">
+                                
                                 <%if(images.length >0){%>
                                     <% images.forEach((image, index) => { %>
                                         <img id="slide" src="/media/<%-store.folder%>/big/<%-image.name%>" alt="Foto: <%=product.name%>" class="zoom" data-magnify-src="/media/<%-store.folder%>/big/<%-image.name%>">
@@ -128,6 +133,7 @@
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-6">
+                        
                             <div class="product-description">
                                 <!-- Product Title & Meta Data-->
                                 <div class="product-title-meta-data bg-white pb-3">
@@ -145,8 +151,11 @@
 
 
                                         </div>
-                                        <%-(product.discount > 0) ? ` <span class="badge badge-danger off wow slideInRight" data-wow-duration="200" data-wow-delay="0" style="font-size: 27px !important; height: fit-content; ">${Math.round((product.discount/product.price) * 100)}% OFF<small class="economia">Economize <span style="font-weight:400">${Math.round((product.discount) * 100)/100}</span></small></span>` : ''%>
 
+
+
+                                        <%-(product.discount > 0) ? `<span class="badge badge-danger off wow slideInRight" data-wow-duration="200" data-wow-delay="0" style="font-size: 27px !important; height: fit-content; ">${(Math.round((product.discount/product.price) * 100) > Math.round((product.discount) * 100)/100) ? `${Math.round((product.discount/product.price) * 100)}% OFF  <small class="economia">APROVEITE</small>` : `R$${Math.round(product.discount)} OFF <small class="economia">APROVEITE</small>` }</span>` : ''%>
+                                      
 
 
                                     </div>

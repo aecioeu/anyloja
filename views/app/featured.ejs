@@ -32,7 +32,7 @@
                                                     </a>
                                                     <%-((product.featured == 1) ? `<span class="badge badge-success">Destaque</span>`:``)  %>
                                            
-                                                    <%-((product.discount > 0) ? `<p class="sale-price"><span>R$${product.price}</span><br>R$${(product.price-product.discount)}</p>` : `<p class="sale-price">${product.price}</p>` )%>
+                                                    <%-((product.discount > 0) ? `<p class="sale-price"><span>R$${product.price}</span><br>R$${(product.price-product.discount)}</p>` : `<p class="sale-price">R$${product.price}</p>` )%>
                                                         <div class="product-rating"><i class="lni lni-star-filled"></i><i class="lni lni-star-filled"></i><i class="lni lni-star-filled"></i><i class="lni lni-star-filled"></i><i class="lni lni-star-filled"></i></div>
 
                                             </div>

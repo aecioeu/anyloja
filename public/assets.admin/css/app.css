@@ -4007,3 +4007,11 @@ body.authentication-bg {
     position: relative;
     cursor: pointer;
 }
+
+.final-price{
+    line-height: 42px;
+}
+
+.table-prices{
+    display: contents;
+}

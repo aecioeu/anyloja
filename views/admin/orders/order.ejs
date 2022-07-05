@@ -29,7 +29,7 @@
                     <div class="card">
 
                         <div class="card-body pt-2 pb-3">
-                            <a href="#" class="btn btn-danger btn-sm mt-2 float-right">
+                            <a href="/media/<%-store.folder%>/pdf/<%-order.id%>-<%-order.seller_id%>.pdf" class="btn btn-danger btn-sm mt-2 float-right">
                             Baixar PDF
 
                         </a>
@@ -101,13 +101,15 @@
 
                                                                         <div class="media-body">
                                                                             <div class="align-self-center float-right">
-                                                                                <rs>R$</rs>
-                                                                                <%-(product.qnt*product.price)%>
+                                                                                <%-(product.total)%>
                                                                             </div>
                                                                             <a href="/loja/product/<%-product.product_id%>">
                                                                                 <h6 class="mt-0 mb-0 font-size-15 font-weight-normal">
                                                                                     <span class="font-weight-bold">
-                                    <%-product.name%>
+                                   
+                                   <%if(product.cod) {%>
+                                                                                        <span class="mt-1 badge badge-soft-secondary p-1" style="font-size:10px">COD: <%-product.cod%></span><br>
+                                                                                        <% }%> <%-product.name%>
 
 
                                 </span>
@@ -119,8 +121,7 @@
                                                                             </a>
                                                                             <p class="text-muted">
                                                                                 <%-product.qnt%> x
-                                                                                    <rs>R$</rs>
-                                                                                    <%-product.price%>
+                                                                                    R$<%-product.price%>
                                                                             </p>
                                                                         </div>
                                                 </div>

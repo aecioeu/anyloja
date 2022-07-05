@@ -1,4 +1,4 @@
-<%-include('partials/header', {back : 'true', header:"Sua Sacola", title: 'Sua Sacola' , description: 'Seus Produtos no Carrinho'})-%>
+<%-include('partials/header', {back : 'true', header:"SEU PEDIDO", title: 'Seu Pedido' , description: 'Seus Produtos no Carrinho'})-%>
     <%- include('partials/menu') -%>
 
         <div class="page-content-wrapper content-cart">
@@ -10,7 +10,7 @@
 
                     <img src="/assets/img/2-s.png" class="mt-4">
 
-                    <h6 class="mb-0 mt-2">Sua sacola está vazia</h6>
+                    <h6 class="mb-0 mt-2">Não há itens no seu pedido.</h6>
                     <p class="mb-2">Você ainda não escolheu nada da loja.</p>
 
                     <a class="btn mt-4" href="/<%=(store.cod)%>" style="color: #fff;
@@ -19,7 +19,7 @@
                         border-color: #19c5a8;">Ver Nosso Catalogo</a>
                 </div>
                 <div class="cart-wrapper-area py-3">
-                    <h6 class="mt-1 header-order">Seu Pedido 👇</h6>
+                    <!--<h6 class="mt-1 header-order">SEU PEDIDO</h6>-->
                     <div class="cart-table card mb-3">
                         <div class="table-responsive card-body">
                             <table class="table mb-0">
@@ -48,7 +48,8 @@
                 <div class="card coupon-card mb-1">
                     <div class="card-body">
                         <div class="apply-coupon">
-                            <h6 class="mb-0">👋 AVISO DA LOJA</h6>
+                            <span class="aviso-icon">👋</span>
+                            <h6 class="mb-0"> AVISO DA LOJA</h6>
                             <p class="mb-2"><%=store.message%></p>
 
                         </div>
@@ -63,8 +64,9 @@
             <hr class="mb-3">
             <div class="card cart-amount-area total-card">
                 <div class="card-body  align-items-center justify-content-between">
-
+                    <!--<h6 class="mt-1 header-order">RESUMO</h6>-->
                     <span class="float-right mr-2">
+                        
                         <span class="mb-0 mr-1 sub">TOTAL DO PEDIDO <h5 class="total-price tt float-right">
                                 <rs>R$</rs>0
                             </h5></span>

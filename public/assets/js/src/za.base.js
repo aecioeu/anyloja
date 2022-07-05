@@ -201,33 +201,35 @@ function InitCart() {
 
                     if (item.variation) {
                         $.each(item.variation, function(i2, variation) {
-                            variation_details += `<span class="badge badge-success mr-1">${variation.variation} - ${variation.choice}</span>`
+                            variation_details += `<span class="badge azul mr-1">${variation.variation} - ${variation.choice}</span>`
                         })
                     }
 
                     //${((product.media.length > 0) ? `/media/${data.store.folder}/${product.media[0].name}
                     cart_item_template += `<tr class="item-cart-${i}">
                 <td width="10%">
-                <a onclick="removeItem('${i}')" style="position: absolute; margin: -5px 0px 0px -15px;" class="remove-product" href="#"><svg class="icon h28 no-border">
-                <use xlink:href="#remove"></use>
-              </svg></a>
+              
                 <img src="${item.pic}" alt="${item.name}" class="no-border"></td>
                 <td>
-                <a style="font-size: 1.3em;" href="/${data.store.cod}/product/${item.id}">${item.name}</a>
+                <a onclick="removeItem('${i}')" class="remove-product" href="#"><svg class="icon h28 no-border">
+                <use xlink:href="#remove"></use>
+              </svg></a>
+                <a style="margin-right: 30px;display: flex;" href="/${data.store.cod}/product/${item.id}">${item.name}</a>
                 ${((variation_details) ? `${variation_details}` : '')}
                
-                <div class="cart-form mt-2">
-                <div class="order-plus-minus d-flex align-items-center">
-                <div class="quantity-button-handler a">-</div>
-                <input class="form-control cart-quantity-input qty-text" type="text" step="1" product-cart-id="${i}" name="quantity" value="${item.qnt}" disabled>
-                <div class="quantity-button-handler a">+</div>
-
-            </div>
-            </div>
-            <div class="mt-2">
+               
+            <div>
             ${(item.discount > 0) ? `<span style="display: block;font-size:12px">Custava <span class="item-undiscount-${i} mt-2" style="text-decoration: line-through!important;"><span class="rs">R$</span>${price((item.price+item.discount) * item.qnt)}</span></span>`:''}
             <span style="display: block;"><span class="item-${i} mt-0 green-price" ><span class="rs">R$</span>${price(item.price * item.qnt)}</span> ${(item.discount > 0) ? `<small class="trasparent35 wow slideInRight" data-wow-duration="200" data-wow-delay="0">(ECONOMIZOU <span class="trasparent75 bold item-economy-${i}"><span class="rs">R$</span>${price(item.discount * item.qnt)}</span>)</small>`:''}</span>
            </div>
+           <div class="cart-form mt-2">
+           <div class="order-plus-minus d-flex align-items-center">
+           <div class="quantity-button-handler a">-</div>
+           <input class="form-control cart-quantity-input qty-text" type="text" step="1" product-cart-id="${i}" name="quantity" value="${item.qnt}" disabled>
+           <div class="quantity-button-handler a">+</div>
+
+       </div>
+       </div>
                 </td>
                 
                 </tr>`
@@ -745,7 +747,7 @@ async function addCart(itemID) {
 
                 $("body").append(`<span class='emoji-aleatorio'>${emojis[randomEmoji]}<p class="texto-emoji">${item.name}, ${itenGenero(item.name)} com Sucesso!</p></span><div class='add2cart-notification animated'>O que deseja fazer ?
             <a class="btn btn-warning btn-lg w-100 mt-1" href="javascript:history.back()">CONTINUAR COMPRANDO</a>
-            <a class="btn btn-success btn-lg mt-3 mb-2 w-100" href="/cart/${data.store.cod}" >FINALIZAR COMPRA</a>
+            <a class="btn btn-success-green btn-lg mt-3 mb-2 w-100" href="/cart/${data.store.cod}" >FINALIZAR COMPRA</a>
             </div>`)
                 $('.add2cart-notify').prop("disabled", true);
                 $('.page-content-wrapper').addClass('blur')
@@ -937,7 +939,7 @@ function getNotificationData(token, storeName, price, cod, folder, order_cod) {
 
 function sendMessage(cod, price, folder, order_cod) {
 
-  /*  $.ajax({
+   $.ajax({
         url: "/loja/notify",
         type: "POST",
         data: {
@@ -946,9 +948,7 @@ function sendMessage(cod, price, folder, order_cod) {
         success: function(results) {
             console.log(results)
             $.each(results, function(i, result) {
-
                 //console.log(result.token, result.store_name)
-
                 $.ajax({
                     type: "POST",
                     url: "https://fcm.googleapis.com/fcm/send",
@@ -964,7 +964,7 @@ function sendMessage(cod, price, folder, order_cod) {
                         console.log(data)
                     },
                     error: function(xhr, status, error) {
-                        alert("Houve um erro ao enviar a mensagem!");
+                        //alert("Houve um erro ao enviar a mensagem!");
                         console.error("Status:", status, xhr.error);
                     }
                 });
@@ -975,7 +975,7 @@ function sendMessage(cod, price, folder, order_cod) {
             alert("error");
         }
 
-    });*/
+    });
 
 
 }
@@ -1217,7 +1217,7 @@ $('.whatsapp').click(function () {
         $('.show-stories').show()
 
         $(".stories-view").on("click", function () {
-            fbq('track', 'Storie');
+            fbq('track', 'View Stories');
         });
 
 
@@ -1272,15 +1272,16 @@ $('.whatsapp').click(function () {
  if ($.fn.owlCarousel) {
     var flashSlide = $('.menu-slide');
     flashSlide.owlCarousel({
+        margin:10,
+        //rewindNav: false,
         items: 3,
-       
-        loop: true,
-      
-        autoplayTimeout: 5000,
-        responsiveClass:true,
-        autoHeight: false,
+        //loop: false,
+        //autoplayTimeout: 5000,
+        //responsiveClass:true,
+        autoHeight: true,
         dots: false,
-        nav: false,
+        nav: true,
+        navText: [(''), ('<img class="arrow-menu" src="/assets/img/next.png">')],
         responsive: {
             1400: {
                 items: 5,
@@ -1292,10 +1293,12 @@ $('.whatsapp').click(function () {
                 items: 4,
             },
             480: {
-                items: 5,
+                items: 4,
             },
         },
+   
     })
+    $('.menu-slide .owl-item').attr("width", "100%").css("width", "");
 }
 
 
@@ -1340,9 +1343,10 @@ $('.whatsapp').click(function () {
             loop: true,
             autoplay: false,
             autoplayTimeout: 5000,
-   
+            onInitialized: counter,
+            onChanged: counter,
             autoHeight: true,
-            dots: true,
+            dots: false,
             nav: true,
             navText: [('<svg class="icon arrow left-slide"><use xlink:href="#arrow"></use></svg>'), ('<svg class="icon arrow right-slide"><use xlink:href="#arrow"></use></svg>')],
             onTranslated: function() {
@@ -1374,6 +1378,15 @@ $('.whatsapp').click(function () {
       });
         
     }
+
+    function counter(event) {
+        if (!event.namespace) {
+          return;
+        }
+        var slides = event.relatedTarget;
+        $('.slider-counter').text(slides.relative(slides.current()) + 1 + '/' + slides.items().length);
+        console.log(slides.relative(slides.current()) + 1 + '/' + slides.items().length)
+      }
 
 });
 

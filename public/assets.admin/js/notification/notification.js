@@ -79,7 +79,7 @@ function sendMessage(cod, price, folder, order_cod) {
                         console.log(data)
                     },
                     error: function(xhr, status, error) {
-                        alert("Houve um erro ao enviar a mensagem!");
+                        //alert("Houve um erro ao enviar a mensagem!");
                         console.error("Status:", status, xhr.error);
                     }
                 });
@@ -87,7 +87,7 @@ function sendMessage(cod, price, folder, order_cod) {
             });
         },
         error: function() {
-            alert("error");
+           // alert("error");
         }
 
     });

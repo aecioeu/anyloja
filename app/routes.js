@@ -14,9 +14,97 @@ const bannerhelper = require("../config/upload-banner");
 const logofilehelper = require("../config/upload-logo");
 var bodyParser = require("body-parser");
 var fs = require("fs");
+var moment = require("moment")
+var pdf = require("pdf-creator-node");
 /*const {
     push
 } = require('mysql2/lib/constants/charset_encodings');*/
+
+
+const waitFor = (ms) => new Promise((r) => setTimeout(r, ms));
+async function asyncForEach(array, callback) {
+  for (let index = 0; index < array.length; index++) {
+    await callback(array[index], index, array);
+  }
+}
+
+
+
+
+async function st(){
+
+
+  var stores = await pool.query(
+    "SELECT * FROM stores"
+  );
+  await asyncForEach(stores, async (store) => {
+  //product.cod
+   //verifica se há uma tabela padrão dos produtos
+   //const store = await pool.query("SELECT *  FROM stores WHERE cod = ?", [cod])
+   const priceTable = await pool.query("SELECT * FROM products_table WHERE store_id = ?", [store.id])
+  
+   if(!priceTable[0]){
+    var data = {
+      name: "Tabela Padrão",
+      description: "Tabela de Preços Padrão",
+      store_id: store.id
+    };
+     pool.query("INSERT INTO products_table SET ?", data, function (err, result) {
+      console.log("Nova Tabela de Preços registrada no sistema")
+    });
+   }
+  });
+ 
+  
+  
+  var products = await pool.query(
+    "SELECT * FROM products"
+  );
+  
+  await asyncForEach(products, async (product) => {
+  //product.cod
+  
+   //verifica se há uma tabela padrão dos produtos
+   //const store = await pool.query("SELECT *  FROM stores WHERE cod = ?", [cod])
+   const priceTable = await pool.query("SELECT * FROM products_table WHERE store_id = ?", [product.store_id])
+  
+   if(priceTable[0]){
+    var data = {
+      store_id: product.store_id,
+      product_id: product.id,
+      price: product.price,
+      discount: product.discount,
+      product_table: priceTable[0].id,
+     
+    };
+  
+     pool.query("INSERT INTO products_price SET ?", data, function (err, result) {
+      console.log(product.name + " registrada na tabela ")
+    });
+  
+   }
+  
+   
+  
+  
+         
+  
+  
+  
+  });
+  
+  
+  
+}
+
+
+
+
+
+
+
+
+
 
 const { Console } = require("console");
 
@@ -50,6 +138,17 @@ module.exports = function (app, passport) {
     var fileSizeInBytes = stats.size;
     return fileSizeInBytes;
   }
+
+
+
+
+
+function BRL(number){
+//com R$
+var dinheiro = number.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+return dinheiro
+}
+
 
   var timemark = null;
 
@@ -143,12 +242,6 @@ module.exports = function (app, passport) {
     //console.log(queue);
   });
 
-  const waitFor = (ms) => new Promise((r) => setTimeout(r, ms));
-  async function asyncForEach(array, callback) {
-    for (let index = 0; index < array.length; index++) {
-      await callback(array[index], index, array);
-    }
-  }
 
   function makeid(length) {
     var result = "";
@@ -275,11 +368,18 @@ module.exports = function (app, passport) {
   });
 
   app.get("/loja/order/:order_id", isLoggedIn, async function (req, res, next) {
+
+
     var order_id = req.params.order_id;
 
     var order = await pool.query(
       "SELECT * FROM orders WHERE store_id = ? AND order_cod=? LIMIT 0,1",
       [req.user.id, order_id]
+    );
+
+    var store = await pool.query(
+      "SELECT *  FROM stores WHERE id = ?",
+      [order[0].store_id]
     );
     // var products = await pool.query("SELECT * FROM orders_products WHERE store_id = ? AND order_id=? LIMIT 0,1", [req.user.id, order[0].id])
 
@@ -295,17 +395,23 @@ module.exports = function (app, passport) {
       "SELECT * FROM orders_products WHERE store_id = ? AND order_id=?",
       [req.user.id, order[0].id]
     );
+    var qntItens = 0
+
     await asyncForEach(products, async (product) => {
       var images = await pool.query(
         "SELECT name FROM media WHERE product_id = ? ORDER BY media.order ASC LIMIT 0,1",
         [product.product_id]
       );
+      qntItens++
+
       var arrayProd = {
+        item: qntItens,
         cod: product.cod,
         product_id: product.product_id,
         name: product.name,
-        price: product.price,
+        price: BRL(product.price),
         qnt: product.qnt,
+        total: BRL((product.price * product.qnt)),
         variations: product.variations,
         media: images,
       };
@@ -318,6 +424,67 @@ module.exports = function (app, passport) {
       order: order[0],
       products: products_array,
     });
+
+
+
+// verificar se existe o arquivo
+
+fs.stat(`./public/media/${store[0].folder}/pdf/${order[0].id}-${order[0].seller_id}.pdf`, async function(err, stat) {
+  if(err == null) {
+      console.log('Já existe PDF do pedido');
+  } else if(err.code == 'ENOENT') {
+
+    var options = {
+      format: "A4",
+      orientation: "portrait",
+      border: "15mm",
+      header: {
+          height: "0mm",
+          contents: `
+          
+          `
+      },
+      footer: {
+          height: "10mm",
+          contents: {
+              first: '',
+              2: '', // Any page number is working. 1-based index
+              default: '<span style="color: #444; float: right; ">{{page}}/{{pages}}</span>', // fallback value
+              last: ''
+          }
+      }
+  };
+
+  // Read HTML Template
+  var html = fs.readFileSync("./views/admin/template/order.html", "utf8");
+
+  await pdf
+  .create(
+      {
+      html: html,
+      data: {
+          products : products_array, 
+          total: BRL(order[0].total),
+          order: order[0],
+          date: moment(order[0].created).format('DD/MM/YYYY'),
+          store : store[0]
+      },
+      path: `./public/media/${store[0].folder}/pdf/${order[0].id}-${order[0].seller_id}.pdf`,
+      type: "",
+      },
+      options
+  )
+  .then(async (res) => {
+    console.log("PDF Criado")
+      
+  });
+
+  } else {
+    console.log('Some other error: ', err.code);
+}
+});
+
+    //console.log(`./public/media/${store[0].folder}/pdf/${order[0].id}-${order[0].seller_id}.pdf`)
 
     /*  var start = req.query.start
         var end = req.query.end
@@ -1394,9 +1561,32 @@ console.log(pieces.indexOf('rook'));
         [req.user.id]
       );
 
+      var prices = await pool.query(
+        `Select
+        products_price.price,
+        products_price.discount,
+        products_table.name,
+        products_table.id as table_id,
+        products_table.store_id,
+        products_price.product_id
+
+    From
+        products_price Inner Join
+        products_table On products_table.id = products_price.product_table
+    Where
+        products_table.store_id = ? And
+        products_price.product_id = ?
+    Order by  products_table.created ASC`,
+        [req.user.id, product_info[0].id]
+    
+      );
+
+      console.log(prices)
+
       res.render("admin/products/product-edit.ejs", {
         store: req.user,
         thisproduct: product_info[0],
+        prices : prices,
         category: category_info,
         tags: tags_titles,
       });
@@ -1715,7 +1905,7 @@ console.log(pieces.indexOf('rook'));
     });
   });
 
-  /* app.post('/loja/notify', async function (req, res) {
+  app.post('/loja/notify', async function (req, res) {
         // render the page and pass in any flash data if it exists
         var cod = req.body.cod
         //var count = req.body.count
@@ -1738,8 +1928,8 @@ console.log(pieces.indexOf('rook'));
     
         }
 
-   res.json( tokens)
-    });*/
+   res.json(tokens)
+    });
 
   app.post("/loja/BannersMedia", isLoggedIn, async function (req, res) {
     // render the page and pass in any flash data if it exists
@@ -2010,6 +2200,16 @@ console.log(pieces.indexOf('rook'));
   });
 
   async function LoginAcess(req, res, next) {
+
+
+    const cod = req.params.cod;
+    const store = await pool.query(
+      "SELECT require_login  FROM stores WHERE cod = ?",
+      [cod]
+    );
+
+    if(store[0].require_login == 0 ) return next()
+
     req.session.urlRedirect = req.url;
 
     if (!req.user) {
@@ -2035,6 +2235,8 @@ console.log(pieces.indexOf('rook'));
     } else {
       return next();
     }
+
+
   }
 
   app.get("/catalogo/login", async function (req, res, next) {
@@ -2089,10 +2291,12 @@ console.log(pieces.indexOf('rook'));
   app.get("/:cod", LoginAcess, async function (req, res, next) {
     try {
       const cod = req.params.cod;
+
       const store = await pool.query(
         "SELECT id,logo,store,cod, name, address, bio, phone, min_order, instagram, facebook, folder, pixel, show_categories_home, show_banner_sequential,show_search_at_home  FROM stores WHERE cod = ?",
         [cod]
       );
+
       const categories = await pool.query(
         "SELECT name, category_id, icon FROM categories WHERE active ='1' AND store_id = ? ORDER BY categories.name ASC",
         [store[0].id]
@@ -3040,9 +3244,11 @@ console.log(pieces.indexOf('rook'));
     const products = JSON.parse(req.body.order);
 
     var produtcs_DB = [];
+    var produtcs_PDF = [];
     var totalOrder = 0;
+    var qntItens = 0
     const cod = req.params.cod;
-    const store = await pool.query("SELECT id FROM stores WHERE cod = ?", [
+    const store = await pool.query("SELECT * FROM stores WHERE cod = ?", [
       cod,
     ]);
 
@@ -3082,6 +3288,8 @@ console.log(pieces.indexOf('rook'));
                 "SELECT * FROM products WHERE product_id = ?",
                 [produtc.id]
               );
+
+              qntItens++
               //console.log("produto encontrado", DbProduct[0].name)
 
               // procurando as variacoes
@@ -3114,9 +3322,24 @@ console.log(pieces.indexOf('rook'));
                   qnt: produtc.qnt,
                   order_id: order_id,
                   cod: DbProduct[0].cod ? DbProduct[0].cod : "",
+                  total: parseFloat(DbProduct[0].price - DbProduct[0].discount) * produtc.qnt
                 };
 
                 produtcs_DB.push(productsData);
+
+
+                var productsDataPDF = {
+                  item: qntItens,
+                  cod: DbProduct[0].cod ? DbProduct[0].cod : "",
+                  product_id: DbProduct[0].product_id,
+                  name: DbProduct[0].name,
+                  price: BRL(parseFloat(DbProduct[0].price - DbProduct[0].discount)),
+                  qnt: produtc.qnt,
+                  total: BRL(parseFloat(DbProduct[0].price - DbProduct[0].discount) * produtc.qnt),
+                  variations: `${variation_tpl}`,
+                  };
+
+                produtcs_PDF.push(productsDataPDF);
 
                 totalOrder +=
                   parseFloat(DbProduct[0].price - DbProduct[0].discount) *
@@ -3140,12 +3363,69 @@ console.log(pieces.indexOf('rook'));
               order_cod,
             ]);
 
+            var order = await pool.query(
+              "SELECT * FROM orders WHERE  order_cod=? LIMIT 0,1",
+              [order_cod]
+            );
+
+
             await res.json({
               name: seller[0].name,
               phone: seller[0].phone.replace(/\D/g, ""),
               order_url: order_cod,
               products: produtcs_DB,
             });
+
+              // crinado PDF
+
+              var options = {
+                format: "A4",
+                orientation: "portrait",
+                border: "15mm",
+                header: {
+                    height: "0mm",
+                    contents: `
+                    
+                    `
+                },
+                footer: {
+                    height: "10mm",
+                    contents: {
+                        first: '',
+                        2: '', // Any page number is working. 1-based index
+                        default: '<span style="color: #444; float: right; ">{{page}}/{{pages}}</span>', // fallback value
+                        last: ''
+                    }
+                }
+            };
+
+            // Read HTML Template
+            var html = fs.readFileSync("./views/admin/template/order.html", "utf8");
+
+            await pdf
+            .create(
+                {
+                html: html,
+                data: {
+                    products : produtcs_PDF, 
+                    total: BRL(totalOrder),
+                    order: order[0],
+                    date: moment(order[0].created).format('DD/MM/YYYY'),
+                    store : store[0]
+                },
+                path: `./public/media/${store[0].folder}/pdf/${order_id}-${seller[0].url}.pdf`,
+                type: "",
+                },
+                options
+            )
+            .then(async (res) => {
+              console.log("PDF Criado")
+                
+            });           
+
+
+
+
           }
         );
       } else {

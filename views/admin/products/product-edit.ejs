@@ -133,7 +133,44 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-6">
+                                            <%if(prices.length > 0){%>
+                                                <% prices.forEach((price, index) => { %>
+                                                  
+                                              <div class="table_prices" style=" display: contents !important;">  
+                                                <input type="hidden" name="table[]" value='<%=price.table_id%>'>  
+                                            <div class="col-12">
+                                                              <span class="badge badge-soft-success p-1 font-14 uppercase"><%=price.name%></span>
+                                                              </div>
+
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label for="simpleinput" style="font-size:14px;">Preço</label>
+                                                    <input type="text" class="form-control" pattern="\d+((\(|)|-)\d+)?" inputmode="numeric" onkeyup="k(this);" name="price[]" value="<%=price.price%>" placeholder="0.00">
+
+                                                </div>
+                                            </div>
+
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label for="simpleinput" style="font-size:14px;">Desconto</label>
+                                                    <input type="text" class="form-control" pattern="\d+((\(|)|-)\d+)?" inputmode="numeric" onkeyup="k(this);" name="discount[]" value="<%=price.discount%>" placeholder="0.00">
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label for="simpleinput" style="font-size:14px;">Preço Final</label>
+                                                <span class="final-price form-control">R$0,00</span> 
+                                                </div>
+                                            </div>
+                                               
+                                        </div>  
+                                                <%  }) %>
+                                            <%  } %>
+
+
+
+
+                                       <!--     <div class="col-6">
                                                 <div class="form-group">
                                                     <label for="simpleinput">Preço</label>
                                                     <input type="text" class="form-control" pattern="\d+((\(|)|-)\d+)?" inputmode="numeric" onkeyup="k(this);" name="price" value="<%=thisproduct.price%>" placeholder="0.00">
@@ -148,6 +185,7 @@
 
                                                 </div>
                                             </div>
+                                        -->
 
                                             <div class="col-xl-12 col-sm-12 mb-2">
 
@@ -252,6 +290,31 @@
         <!-- Latest Sortable -->
         <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
         <script>
+
+            function calcPrice(){
+                $('.table_prices').each(function(i, obj) {
+                console.log(obj)
+
+            var amount_val = parseFloat($(this).find('[name="price[]"]').val());
+            var vat_val = parseFloat($(this).find('[name="discount[]"]').val());
+            var vat_amount = amount_val - vat_val;
+            
+            $(this).find('.final-price').text("R$" + parseFloat(vat_amount).toFixed(2));
+    
+            });
+            }
+
+
+$('[name="price[]"], [name="discount[]"]').on('keyup', function() {
+
+    calcPrice()
+
+});
+calcPrice()
+ 
+
+
+
             new Sortable(document.getElementById('mydropzone'), {
                 draggable: '.dz-preview',
                 animation: 150, // ms, animation speed moving items when sorting, `0` — without animation

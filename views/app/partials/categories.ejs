@@ -1,13 +1,13 @@
 
-    <%if(store.show_categories_home !=0){%>
+    <%if(store.show_categories_home !=2){%>
         <div class="product-catagories-wrapper py-3 ">
 
-            <div class="container" <%-(store.show_categories_home == 1) ? `` : `style="padding-left: 0px;"`%>>
+            <div class="container" <%-(store.show_categories_home == 1) ? `` : ``%>>
            
 
                 <h6 class="ml-1 "><%-title%></h6>
 
-                <%if(store.show_categories_home==1){%>
+                <%if(store.show_categories_home==0){%>
 
 
                     <%if(categories.length>0){%>
@@ -38,14 +38,14 @@
 
                                     <% } %>
 
-                                        <%if(store.show_categories_home==2){%>
+                                        <%if(store.show_categories_home==1){%>
 
 
                                             <%if(categories.length>0){%>
-                                                <div class="menu-slide owl-carousel flash-sale-slide">
+                                                <div class="menu-slide owl-carousel">
                                                
                                                 <% categories.forEach((categorie, index)=> { %>
-                                                    <div style="padding-left:15px;" ><a href="<%-`/${store.cod}/buscar?categories=${categorie.category_id}`%>"><span
+                                                    <div class="item" ><a href="<%-`/${store.cod}/buscar?categories=${categorie.category_id}`%>"><span
                                                         class="gbuttom"><%-categorie.name%></span></a></div>
                                                     <%})%>
                         

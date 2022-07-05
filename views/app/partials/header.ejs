@@ -1,6 +1,4 @@
-<!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover, shrink-to-fit=no">
@@ -8,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
     <!-- The above tags *must* come first in the head, any other head content must come *after* these tags-->
     <!-- Title-->
     <!--News Updates-->
@@ -25,9 +24,12 @@
     <!-- Stylesheet-->
     <!-- Web App Manifest-->
 
-      <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/style-master.min.css?v=1.0.7">
+
+    <link rel="preload" href="/assets/fonts/proximanova-light.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-head-react="true">
+    <link rel="preload" href="/assets/fonts/proximanova-regular.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-head-react="true">
+    <link rel="preload" href="/assets/fonts/proximanova-semibold.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-head-react="true">
+
+    <link rel="stylesheet" href="/assets/css/style-master.min.css?v=1.0.8">
 
     <!--
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
@@ -38,7 +40,7 @@
         }
     </style>
 
-    <%if(store.pixel > 10){%>
+    <%if(store.pixel < 10){%>
         <!-- Facebook Pixel Code -->
         <script>
             ! function(f, b, e, v, n, t, s) {
@@ -59,7 +61,7 @@
                 s.parentNode.insertBefore(t, s)
             }(window, document, 'script',
                 'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '<%-store.pixel%>');
+            fbq('init', '194252815890077');
             fbq('track', 'PageView');
         </script>
         <noscript><img height="1" width="1" style="display:none"
@@ -94,14 +96,15 @@
 
                     <!-- Logo Wrapper-->
                     <%if(back == 'true'){%>
-                        <div class="back-button">
-                            <a href="javascript:history.back()"><svg class="icon">
-                <use xlink:href="#back"></use>
+                        <div class="back-button" style="width: 38px;">
+                            <a href="/<%=store.cod%>"><svg class="icon">
+                <use xlink:href="#home"></use>
             </svg></a>
                         </div>
                         <% } else if(back == 'home'){%>
                             <div class="back-button">
-                                <a href="/<%=store.cod%>"><svg class="icon">
+                                <a href="/<%=store.cod%>">
+                                    <svg class="icon">
                 <use xlink:href="#back"></use>
             </svg></a>
                             </div>
